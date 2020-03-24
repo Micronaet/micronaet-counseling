@@ -5,32 +5,91 @@
          <field name="model">calendar.event</field>
          <field name="inherit_id" ref="calendar.view_calendar_event_form"/>
          <field name="arch" type="xml">
+             <xpath expr="//notebook" position="after">
+                  <button name="call_skype" string="Skype call" help="Skype call open and start appointment!" type="object" colspan="1" attrs="{'invisible': ['|',('is_calling', '=', True),('skype_name','=',False)]}" icon="fa-skype"/>
+                  <button name="call_telegram" string="Telegram call" help="Telegram call open and start appointment!" type="object" colspan="1" attrs="{'invisible': ['|',('is_calling', '=', True),('telegram_name','=',False)]}" icon="fa-telegram"/>
+                  <button name="call_hangout" string="hangout call" help="Hangout call open and start appointment!" type="object" colspan="1" attrs="{'invisible': ['|',('is_calling', '=', True),('hangout_name','=',False)]}" icon="fa-skype"/>
+
+                  <newline/>
+                  <button name="start_call" string="Start call" help="Manual start of call so update appointment time" type="object" colspan="1" icon="fa-bolt"/>
+                  <button name="end_call" string="End call" help="Manual end of call so update appointment time" type="object" colspan="1" icon="fa-bolt"/>
+                 
+             </xpath>
              <field name="start_datetime" position="before">
-                 <field name="patient_id" />
+                  <field name="is_calling" invisible="1" />
+                  <field name="patient_id" />
+                  <field name="skype_name" invisible="1" />
+                  <field name="telegram_name" invisible="1" />
+                  <field name="hangout_name" invisible="1" />
+                  
              </field>
          </field>
      </record>
      
      <record model="ir.ui.view" id="view_medical_patient_social_form">
-         <field name="name">medical.social.form</field>
-         <field name="model">medical.social</field>
+         <field name="name">medical.patient.form</field>
+         <field name="model">medical.patient</field>
          <field name="inherit_id" ref="basic_hms.medical_patients_form_view"/>
          <field name="arch" type="xml">
-             <page string="Social">
-                 <group colspan="4" col="4">
-                     <field name="skype_name" />
-                     <button name="call_skype" string="Skype call" type="object" colspan="1" attrs="{'invisible': [('skype_name','=',False)]}"/>
-                     <button name="chat_skype" string="Skype chat" type="object" colspan="1" attrs="{'invisible': [('skype_name','=',False)]}"/>
+             <xpath expr="//notebook/page[1]" position="after">
+                 <page string="Social">
+                     <group colspan="4" col="4">
+                         <field name="skype_name" />
+                         <button name="call_skype" string="Skype call" type="object" colspan="1" attrs="{'invisible': [('skype_name','=',False)]}" icon="fa-skype"/>
+                         <button name="chat_skype" string="Skype chat" type="object" colspan="1" attrs="{'invisible': [('skype_name','=',False)]}" icon="fa-skype"/>
 
-                     <field name="telegram_name" />
-                     <button name="call_skype" string="Skype call" type="object" colspan="1" attrs="{'invisible': [('skype_name','=',False)]}"/>
-                     <button name="chat_skype" string="Skype chat" type="object" colspan="1" attrs="{'invisible': [('skype_name','=',False)]}"/>
+                         <field name="telegram_name" />
+                         <button name="call_telegram" string="Telegram call" type="object" colspan="1" attrs="{'invisible': [('telegram_name','=',False)]}"/>
+                         <button name="chat_telegram" string="Telegram chat" type="object" colspan="1" attrs="{'invisible': [('telegram_name','=',False)]}"/>
 
-                     <field name="hangout_name" />
-                     <button name="call_skype" string="Skype call" type="object" colspan="1" attrs="{'invisible': [('skype_name','=',False)]}"/>
-                     <button name="chat_skype" string="Skype chat" type="object" colspan="1" attrs="{'invisible': [('skype_name','=',False)]}"/>
-                 </group>    
-             </page>
+                         <field name="hangout_name" />
+                         <button name="call_hangout" string="Hangout call" type="object" colspan="1" attrs="{'invisible': [('hangout_name','=',False)]}"/>
+                         <button name="chat_hangout" string="Hangout chat" type="object" colspan="1" attrs="{'invisible': [('hangout_name','=',False)]}"/>
+                     </group>    
+                 </page>
+             </xpath>    
          </field>
      </record>
+     
+     
+     <menuitem 
+         name="Consultorio" 
+         id="menu_counseling_root" 
+         sequence="0"
+         />
+         <menuitem 
+             parent="menu_counseling_root" 
+             id="menu_counseling_calendar" 
+             name="Appointments"
+             sequence="10"
+             />
+             <menuitem 
+                 parent="menu_counseling_calendar" 
+                 id="menu_counseling_calendar_event" 
+                 action="calendar.action_calendar_event"
+                 sequence="10"
+                 />
+         <menuitem 
+             parent="menu_counseling_root" 
+             id="menu_counseling_configuration" 
+             name="Configuration"
+             sequence="99"
+             />
+             <menuitem 
+                 parent="menu_counseling_configuration" 
+                 id="menu_counseling_configuration_patient" 
+                 action="basic_hms.action_medical_patient"
+                 sequence="10"
+                 />
+             <menuitem 
+                 parent="menu_counseling_configuration" 
+                 id="menu_counseling_configuration_doctor" 
+                 action="base.action_res_users"
+                 sequence="20"
+                 name="Consultant"
+                 />
+             <!--action="basic_hms.action_medical_physician"-->    
+             
+         
+     
 </odoo>

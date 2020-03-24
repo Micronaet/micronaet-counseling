@@ -21,6 +21,7 @@
         #'security/ir.model.access.csv',
         
         'views/counseling_view.xml',
+        'wizard/export_intervent_wizard.xml',
         ],
     'external_dependencies': {},
     'application': True,

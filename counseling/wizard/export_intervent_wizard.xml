@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+        
+        <record id="view_calendar_event_excel_report_wizard" model="ir.ui.view">
+            <field name="name">Export event report</field>
+            <field name="model">calendar.event.excel.report.wizard</field>
+            <field name="arch" type="xml">
+              <form string="Extract event report:">
+                  <header>
+                      <button string="Cancel" class="btn-default" special="cancel" />
+                      <button name="extract_event_report" string="Extract" type="object" class="btn-primary" />
+                  </header>
+                  <sheet>                  
+                      <group colspan="4" col="4">
+                          <field name="privacy" />
+                          <separator string="Filter:" colspan="4"/>
+                          <field name="doctor_id" />
+                          <field name="patient_id" />
+
+                          <field name="from_date" />
+                          <field name="to_date" />
+                      </group>    
+                  </sheet>
+              </form>
+            </field>
+        </record>
+
+        <record id="action_calendar_event_excel_report_wizard" model="ir.actions.act_window">
+            <field name="name">Load product Report</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">calendar.event.excel.report.wizard</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_calendar_event_excel_report_wizard"/>
+            <field name="target">new</field>
+        </record>
+      
+        <menuitem 
+            parent="menu_counseling_calendar"
+            sequence="20"
+            id="menu_calendar_event_excel_report_wizard" 
+            action="action_calendar_event_excel_report_wizard"
+            />
+    </data>
+</openerp>

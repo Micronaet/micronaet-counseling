@@ -21,7 +21,7 @@
 #
 ###############################################################################
 
-from . import models
-from . import wizard
+from . import export_intervent
+
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
