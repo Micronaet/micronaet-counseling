@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<odoo>
+     <record model="ir.ui.view" id="view_calendar_counseling_form">
+         <field name="name">calendar.event.form</field>
+         <field name="model">calendar.event</field>
+         <field name="inherit_id" ref="calendar.view_calendar_event_form"/>
+         <field name="arch" type="xml">
+             <field name="start_datetime" position="before">
+                 <field name="patient_id" />
+             </field>
+         </field>
+     </record>
+</odoo>
