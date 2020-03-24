@@ -10,4 +10,27 @@
              </field>
          </field>
      </record>
+     
+     <record model="ir.ui.view" id="view_medical_patient_social_form">
+         <field name="name">medical.social.form</field>
+         <field name="model">medical.social</field>
+         <field name="inherit_id" ref="basic_hms.medical_patients_form_view"/>
+         <field name="arch" type="xml">
+             <page string="Social">
+                 <group colspan="4" col="4">
+                     <field name="skype_name" />
+                     <button name="call_skype" string="Skype call" type="object" colspan="1" attrs="{'invisible': [('skype_name','=',False)]}"/>
+                     <button name="chat_skype" string="Skype chat" type="object" colspan="1" attrs="{'invisible': [('skype_name','=',False)]}"/>
+
+                     <field name="telegram_name" />
+                     <button name="call_skype" string="Skype call" type="object" colspan="1" attrs="{'invisible': [('skype_name','=',False)]}"/>
+                     <button name="chat_skype" string="Skype chat" type="object" colspan="1" attrs="{'invisible': [('skype_name','=',False)]}"/>
+
+                     <field name="hangout_name" />
+                     <button name="call_skype" string="Skype call" type="object" colspan="1" attrs="{'invisible': [('skype_name','=',False)]}"/>
+                     <button name="chat_skype" string="Skype chat" type="object" colspan="1" attrs="{'invisible': [('skype_name','=',False)]}"/>
+                 </group>    
+             </page>
+         </field>
+     </record>
 </odoo>
