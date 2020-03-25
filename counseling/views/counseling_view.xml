@@ -1,10 +1,38 @@
 <?xml version="1.0"?>
 <odoo>
+     <record model="ir.ui.view" id="view_res_user_consultant_tree">
+         <field name="name">res.users.consultant.tree</field>
+         <field name="model">res.users</field>
+         <field name="priority" eval="40" />
+         <field name="arch" type="xml">
+            <tree string="Consultant" editable="bottom">
+	            <field name="name" readonly="1" />
+	            <field name="login" readonly="1" />
+	            <field name="lang" readonly="1" />
+	            <field name="login_date" readonly="1"/>
+	            <field name="consultant" />
+            </tree>
+         </field>
+     </record>     
+     <record model="ir.actions.act_window" id="action_res_users_consultant_form">
+         <field name="name">Consultant</field>
+         <field name="res_model">res.users</field>
+         <field name="view_type">form</field>
+         <field name="view_mode">tree</field>
+         <field name="view_id" ref="view_res_user_consultant_tree"/>
+         <field name="context">{}</field>
+         <field name="domain">[]</field>
+     </record>    
+    
      <record model="ir.ui.view" id="view_calendar_counseling_form">
          <field name="name">calendar.event.form</field>
          <field name="model">calendar.event</field>
          <field name="inherit_id" ref="calendar.view_calendar_event_form"/>
          <field name="arch" type="xml">
+             <field name="partner_ids" position="attributes">
+                 <attribute name="domain">[('consultant', '=', True)]</attribute>
+                 <attribute name="options">{'no_create': True}</attribute>
+             </field>
              <xpath expr="//notebook" position="after">
                   <button name="call_skype" string="Skype call" help="Skype call open and start appointment!" type="object" colspan="1" attrs="{'invisible': ['|',('is_calling', '=', True),('skype_name','=',False)]}" icon="fa-skype"/>
                   <button name="call_telegram" string="Telegram call" help="Telegram call open and start appointment!" type="object" colspan="1" attrs="{'invisible': ['|',('is_calling', '=', True),('telegram_name','=',False)]}" icon="fa-telegram"/>
@@ -84,9 +112,8 @@
              <menuitem 
                  parent="menu_counseling_configuration" 
                  id="menu_counseling_configuration_doctor" 
-                 action="base.action_res_users"
+                 action="action_res_users_consultant_form"
                  sequence="20"
-                 name="Consultant"
                  />
              <!--action="basic_hms.action_medical_physician"-->    
              

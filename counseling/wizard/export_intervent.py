@@ -96,8 +96,8 @@ class CalendarEventExcelReportWizard(models.TransientModel):
         #                          EXTRACT EXCEL:
         # ---------------------------------------------------------------------
         # Excel file configuration: # TODO
-        header = ('Data', 'Alle', 'Durata', 'Dottore', 'Paziente')
-        column_width = (18, 18, 7, 25, 25)
+        header = ('Data', 'Alle', 'Durata', 'Paziente', 'Dottore')
+        column_width = (18, 18, 7, 25, 40)
 
         # ---------------------------------------------------------------------
         # Write detail:
@@ -119,24 +119,32 @@ class CalendarEventExcelReportWizard(models.TransientModel):
         row += 2
         excel_pool.write_xls_line(ws_name, row, header, 
             style_code='header')
+        total = 0.0
         for move in sorted(move_pool.search(domain), 
                 key=lambda x: x.start_datetime):
             row += 1
-            partner = move.partner_ids[0]
-            if doctor.partner_id.id != partner.id:
+            partners = [p for p in move.partner_ids]
+            if doctor and doctor.partner_id not in partners:
                 continue
             if privacy:
                 patient_name = move.patient_id.name
             else:
                 patient_name = move.patient_id.patient_id.name
                 
+            total += move.duration
             excel_pool.write_xls_line(ws_name, row, [
                 move.start_datetime,
                 move.stop_datetime,
                 (self.format_hour(move.duration), 'number'),
-                partner.name,
                 patient_name,
+                ', '.join([p.name for p in partners]),
                 ], style_code='text')
+
+        row += 1
+        excel_pool.write_xls_line(ws_name, row, [
+            'Totale',
+            (self.format_hour(total), 'number'),
+            ], style_code='text', col=1)
                     
 
         return excel_pool.return_attachment('report_interventi')

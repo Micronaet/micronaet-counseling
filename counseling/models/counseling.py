@@ -18,6 +18,14 @@ from odoo.tools import (
 _logger = logging.getLogger(__name__)
 
 
+class ResPartner(models.Model):
+    """ Model name: Partner
+    """
+    _inherit = 'res.partner'
+    
+    
+    consultant = fields.Boolean('Consultant')
+
 
 class CalendarEvent(models.Model):
     """ Model name: Calendar event
