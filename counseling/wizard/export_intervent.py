@@ -81,11 +81,15 @@ class CalendarEventExcelReportWizard(models.TransientModel):
         category = self.category_id
         privacy = self.privacy
 
-        domain = [
-            # Header
-            ('start_datetime', '>=', '%s 00:00:00' % from_date),
-            ('start_datetime', '<', '%s 23:59:59' % to_date),
-            ]
+        domain = []
+        if from_date:
+            domain.append(
+                ('start_datetime', '>=', '%s 00:00:00' % from_date),
+            )
+        if to_date:
+            domain.append(
+                ('start_datetime', '<', '%s 23:59:59' % to_date),
+            )
 
         if counselor:
             domain.append(
