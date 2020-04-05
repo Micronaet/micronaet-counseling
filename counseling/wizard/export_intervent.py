@@ -21,13 +21,8 @@
 #
 ###############################################################################
 
-import os
-import sys
 import logging
-import odoo
 from odoo import api, fields, models, tools, exceptions, SUPERUSER_ID
-from odoo.addons import decimal_precision as dp
-from odoo.tools.translate import _
 
 
 _logger = logging.getLogger(__name__)
@@ -97,7 +92,7 @@ class CalendarEventExcelReportWizard(models.TransientModel):
                 )
         if patient:
             domain.append(
-                ('patient_id', '=', patient.id),
+                ('partner_id', '=', patient.id),
                 )
         if category:
             domain.append(

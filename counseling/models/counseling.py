@@ -1,11 +1,13 @@
 # Copyright 2019  Micronaet SRL (<http://www.micronaet.it>).
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
-import io
 import logging
 from odoo import models, fields, api
-from datetime import datetime, timedelta, MAXYEAR
-
+from datetime import datetime, timedelta
+from odoo.tools import (
+    DEFAULT_SERVER_DATE_FORMAT,
+    DEFAULT_SERVER_DATETIME_FORMAT,
+)
 
 _logger = logging.getLogger(__name__)
 
@@ -36,11 +38,51 @@ class CounselingCalendar(models.Model):
     _order = 'start_datetime'
     _inherit = ['mail.thread']
 
-    #@api.onchange('start_datetime', 'duration')
-    #def _onchange_duration(self):
-    #    if self.start_datetime:
-    #        self.stop = fields.Datetime.to_string(
-    #            self.start_datetime + timedelta(hours=self.duration))
+    '''@api.model
+    def date_to_datetime(self, userdate):
+        """ Convert date values expressed in user's timezone to
+        server-side UTC timestamp, assuming a default arbitrary
+        time of 12:00 AM - because a time is needed.
+
+        :param str userdate: date string in in user time zone
+        :return: UTC datetime string for server-side use
+        """
+        context = self.env.context
+        user_date = datetime.strptime(
+            userdate[:10],
+            DEFAULT_SERVER_DATE_FORMAT)
+        if context and context.get('tz'):
+            tz_name = context['tz']
+        else:
+            tz_name = self.env['res.users'].browse(self.uid).tz
+        if tz_name:
+            import pytz
+            utc = pytz.timezone('UTC')
+            context_tz = pytz.timezone(tz_name)
+            user_datetime = user_date + relativedelta(hours=12.0)
+            local_timestamp = context_tz.localize(user_datetime, is_dst=False)
+            user_datetime = local_timestamp.astimezone(utc)
+            return user_datetime.strftime(DEFAULT_SERVER_DATETIME_FORMAT)
+        return user_date.strftime(DEFAULT_SERVER_DATETIME_FORMAT)'''
+
+    @api.depends('start_datetime', 'duration')
+    def _get_stop_datetime(self):
+        """ Calc end datetime
+        """
+        for attend in self:
+            if attend.start_datetime and attend.duration:
+                start_dt = datetime.strptime(
+                    attend.start_datetime, DEFAULT_SERVER_DATETIME_FORMAT)
+                attend.stop_datetime = fields.Datetime.to_string(
+                    start_dt + timedelta(hours=attend.duration))
+            else:
+                attend.stop_datetime = False
+
+    # @api.onchange('start_datetime', 'duration')
+    # def _onchange_duration(self):
+    #     if self.start_datetime:
+    #         self.stop = fields.Datetime.to_string(
+    #             self.start_datetime + timedelta(hours=self.duration))
 
     name = fields.Char(
         'Meeting Subject', required=True,
@@ -71,6 +113,7 @@ class CounselingCalendar(models.Model):
     )
     stop_datetime = fields.Datetime(
         string='Stop date',
+        compute='_get_stop_datetime',
     )
     duration = fields.Float(
         'Duration', states={'closed': [('readonly', True)]},
