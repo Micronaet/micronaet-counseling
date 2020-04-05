@@ -116,9 +116,7 @@
         <field name="priority" eval="2"/>
         <field name="arch" type="xml">
             <calendar string="Meetings" date_start="start_datetime" date_delay="duration"
-                event_open_popup="true"
-                event_limit="3"
-                color="counselor_id">
+                event_open_popup="true" event_limit="3" color="counselor_id">
                 <field name="name"/>
                 <field name="partner_id"/>
                 <field name="category_id"/>
@@ -134,14 +132,10 @@
         <field name="priority" eval="2"/>
         <field name="arch" type="xml">
             <calendar string="Meetings" date_start="start_datetime" date_delay="duration"
-                event_open_popup="true"
-                event_limit="3"
-                color="category_id">
+                event_open_popup="true" event_limit="3" color="category_id">
                 <field name="name"/>
                 <field name="partner_id"/>
                 <field name="state" />
-                <!--<field name="partner_ids" write_model="calendar.contacts" write_field="partner_id" avatar_field="image_small"/>-->
-                <!--<field name="is_highlighted" invisible="1"/>-->
             </calendar>
         </field>
     </record>
@@ -228,10 +222,24 @@
              />
              <menuitem
                  parent="menu_counseling_calendar"
+                 id="menu_counseling_consultant_calendar_my"
+                 action="counseling_counsultant_calendar_my_action"
+                 sequence="10"
+                 />
+
+         <menuitem
+             parent="menu_counseling_root"
+             id="menu_counseling_management"
+             name="Management"
+             sequence="20"
+             />
+             <menuitem
+                 parent="menu_counseling_calendar"
                  id="menu_counseling_consultant_calendar"
                  action="counseling_counsultant_calendar_action"
                  sequence="10"
                  />
+
          <menuitem
              parent="menu_counseling_root"
              id="menu_counseling_configuration"
