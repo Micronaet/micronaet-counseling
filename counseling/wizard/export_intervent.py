@@ -125,8 +125,8 @@ class CalendarEventExcelReportWizard(models.TransientModel):
             'Periodo [%s, %s], [Categoria %s]' % (
                 counselor.partner_id.name if counselor else 'Tutti',
                 patient.name if patient else 'Tutti',
-                from_date,
-                to_date,
+                from_date or '/',
+                to_date or '/',
                 category.name if category else 'Tutte',
                 )
             ], style_code='title')
