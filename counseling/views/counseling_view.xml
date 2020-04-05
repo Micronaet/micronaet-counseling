@@ -238,7 +238,7 @@
              groups="group_admin,group_manager"
              />
              <menuitem
-                 parent="menu_counseling_calendar"
+                 parent="menu_counseling_management"
                  id="menu_counseling_consultant_calendar"
                  action="counseling_counsultant_calendar_action"
                  sequence="10"
