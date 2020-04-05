@@ -361,6 +361,23 @@
          </field>
      </record>-->
 
+     <record id="res_partner_patient_action" model="ir.actions.act_window">
+         <field name="name">Patient</field>
+         <field name="type">ir.actions.act_window</field>
+         <field name="res_model">res.partner</field>
+         <field name="view_mode">tree,form</field>
+         <field name="domain">[('patient', '=', True)]</field>
+         <field name="context">{'default_patient': True,}</field>
+     </record>
+     <record id="res_partner_partner_action" model="ir.actions.act_window">
+         <field name="name">Partner</field>
+         <field name="type">ir.actions.act_window</field>
+         <field name="res_model">res.partner</field>
+         <field name="view_mode">tree,form</field>
+         <field name="domain">[]</field>
+         <field name="context">{}</field>
+     </record>
+
      <menuitem
          name="Consultorio"
          id="menu_counseling_root"
@@ -379,12 +396,6 @@
                  action="my_counseling_calendar_category_calendar_action"
                  sequence="10"
                  />
-             <!--<menuitem
-                 parent="menu_counseling_calendar"
-                 id="menu_my_counseling_calendar_counselor_calendar_action"
-                 action="my_counseling_calendar_counselor_calendar_action"
-                 sequence="20"
-                 />-->
              <menuitem
                  parent="menu_counseling_calendar"
                  id="menu_my_counseling_calendar_partner_calendar_action"
@@ -445,23 +456,29 @@
              groups="group_admin,group_manager"
              sequence="99"
              />
-             <!--<menuitem
+             <menuitem
                  parent="menu_counseling_configuration"
                  id="menu_counseling_configuration_patient"
-                 action="basic_hms.action_medical_patient"
+                 action="res_partner_patient_action"
                  sequence="10"
-                 />-->
+                 />
+             <menuitem
+                 parent="menu_counseling_configuration"
+                 id="menu_counseling_configuration_partner"
+                 action="res_partner_partner_action"
+                 sequence="20"
+                 />
              <menuitem
                  parent="menu_counseling_configuration"
                  id="menu_counseling_configuration_consultant"
                  action="action_res_users_consultant_form"
-                 sequence="20"
+                 sequence="30"
                  />
              <menuitem
                  parent="menu_counseling_configuration"
                  id="menu_counseling_calendar_category"
                  action="counseling_calendar_category_action"
-                 sequence="20"
+                 sequence="40"
                  />
 
 </odoo>

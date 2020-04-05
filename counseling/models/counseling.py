@@ -16,6 +16,7 @@ class ResPartner(models.Model):
     _inherit = 'res.partner'
 
     consultant = fields.Boolean('Consultant')
+    patient = fields.Boolean('Patient')
 
 
 class CounselingCalendarCategory(models.Model):
