@@ -216,6 +216,19 @@
             </calendar>
         </field>
     </record>
+    <record id="view_counseling_calendar_state_calendar" model="ir.ui.view">
+        <field name="name">State calendar</field>
+        <field name="model">counseling.calendar</field>
+        <field name="priority" eval="30"/>
+        <field name="arch" type="xml">
+            <calendar string="Meetings" date_start="start_datetime" date_delay="duration"
+                event_open_popup="true" event_limit="3" color="state">
+                <field name="name"/>
+                <field name="partner_id"/>
+                <field name="state" />
+            </calendar>
+        </field>
+    </record>
 
     <!--                                 ACTION:                                      -->
     <record id="my_counseling_calendar_category_calendar_action" model="ir.actions.act_window">
@@ -245,6 +258,15 @@
         <field name="view_id" ref="counseling.view_counseling_calendar_partner_calendar"/>
         <field name="view_mode">calendar,tree,form</field>
     </record>
+    <record id="my_counseling_calendar_state_calendar_action" model="ir.actions.act_window">
+        <field name="name">My state calendar</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">counseling.calendar</field>
+        <field name="domain">[('counselor_id', '=', uid)]</field>
+        <field name="default">{'default_counselor_id': uid}</field>
+        <field name="view_id" ref="counseling.view_counseling_calendar_state_calendar"/>
+        <field name="view_mode">calendar,tree,form</field>
+    </record>
 
     <record id="all_counseling_calendar_category_calendar_action" model="ir.actions.act_window">
         <field name="name">All category calendar</field>
@@ -271,6 +293,15 @@
         <field name="domain">[]</field>
         <field name="default">{}</field>
         <field name="view_id" ref="counseling.view_counseling_calendar_partner_calendar"/>
+        <field name="view_mode">calendar,tree,form</field>
+    </record>
+    <record id="all_counseling_calendar_state_calendar_action" model="ir.actions.act_window">
+        <field name="name">All state calendar</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">counseling.calendar</field>
+        <field name="domain">[]</field>
+        <field name="default">{}</field>
+        <field name="view_id" ref="counseling.view_counseling_calendar_state_calendar"/>
         <field name="view_mode">calendar,tree,form</field>
     </record>
 
@@ -360,6 +391,12 @@
                  action="my_counseling_calendar_partner_calendar_action"
                  sequence="30"
                  />
+             <menuitem
+                 parent="menu_counseling_calendar"
+                 id="menu_my_counseling_calendar_state_calendar_action"
+                 action="my_counseling_calendar_state_calendar_action"
+                 sequence="30"
+                 />
 
          <menuitem
              parent="menu_counseling_root"
@@ -385,6 +422,12 @@
                  id="menu_all_counseling_calendar_partner_calendar_action"
                  action="all_counseling_calendar_partner_calendar_action"
                  sequence="30"
+                 />
+             <menuitem
+                 parent="menu_counseling_management"
+                 id="menu_all_counseling_calendar_state_calendar_action"
+                 action="all_counseling_calendar_state_calendar_action"
+                 sequence="40"
                  />
 
          <menuitem
