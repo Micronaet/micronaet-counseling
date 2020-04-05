@@ -66,7 +66,7 @@
         <field name="name">counseling.calendar.search</field>
         <field name="model">counseling.calendar</field>
         <field name="arch" type="xml">
-            <search string="Calendar search" version="7.0">
+            <search string="Calendar search">
                 <field name="name" />
                 <field name="location" />
                 <field name="category_id" filter_domain="[('category_id.name','ilike',self)]"/>
