@@ -68,7 +68,7 @@ class CalendarEventExcelReportWizard(models.TransientModel):
     def extract_event_report(self):
         """ Extract Excel report
         """
-        move_pool = self.env['counseling.calendar']
+        attendance = self.env['counseling.calendar']
         excel_pool = self.env['excel.report']
 
         # Wizard parameters:
@@ -108,7 +108,8 @@ class CalendarEventExcelReportWizard(models.TransientModel):
         #                          EXTRACT EXCEL:
         # ---------------------------------------------------------------------
         # Excel file configuration: # TODO
-        header = ('Data', 'Alle', 'Durata', 'Paziente', 'Dottore', 'Categoria')
+        header = (
+            'Data', 'Alle', 'Durata', 'Paziente', 'Consulente', 'Categoria')
         column_width = (18, 18, 7, 25, 30, 25)
 
         # ---------------------------------------------------------------------
@@ -134,22 +135,22 @@ class CalendarEventExcelReportWizard(models.TransientModel):
         excel_pool.write_xls_line(ws_name, row, header,
                                   style_code='header')
         total = 0.0
-        for move in sorted(move_pool.search(domain),
-                           key=lambda x: x.start_datetime):
+        for attendance in sorted(attendance.search(domain),
+                                 key=lambda x: x.start_datetime):
             if privacy:
-                patient_name = 'ID %s' % move.partner_id.id
+                patient_name = 'ID %s' % attendance.partner_id.id
             else:
-                patient_name = move.partner_id.name
+                patient_name = attendance.partner_id.name
 
-            total += move.duration
+            total += attendance.duration
             row += 1
             excel_pool.write_xls_line(ws_name, row, [
-                move.start_datetime,
-                move.stop_datetime,
-                (self.format_hour(move.duration), 'number'),
+                attendance.start_datetime,
+                attendance.stop_datetime,
+                (self.format_hour(attendance.duration), 'number'),
                 patient_name,
-                counselor.name,
-                category.name,
+                attendance.counselor_id.name,
+                attendance.category_id.name or '/',
                 ], style_code='text')
 
         row += 1
