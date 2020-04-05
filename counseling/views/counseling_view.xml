@@ -121,11 +121,37 @@
                 color="counselor_id">
                 <field name="name"/>
                 <field name="partner_id"/>
+                <field name="category_id"/>
                 <field name="state" />
                 <!--<field name="partner_ids" write_model="calendar.contacts" write_field="partner_id" avatar_field="image_small"/>-->
                 <!--<field name="is_highlighted" invisible="1"/>-->
             </calendar>
         </field>
+    </record>
+    <record id="view_counseling_calendar_counselor_calendar" model="ir.ui.view">
+        <field name="name">Counseling Calendar</field>
+        <field name="model">counseling.calendar</field>
+        <field name="priority" eval="2"/>
+        <field name="arch" type="xml">
+            <calendar string="Meetings" date_start="start_datetime" date_delay="duration"
+                event_open_popup="true"
+                event_limit="3"
+                color="category_id">
+                <field name="name"/>
+                <field name="partner_id"/>
+                <field name="state" />
+                <!--<field name="partner_ids" write_model="calendar.contacts" write_field="partner_id" avatar_field="image_small"/>-->
+                <!--<field name="is_highlighted" invisible="1"/>-->
+            </calendar>
+        </field>
+    </record>
+    <record id="counseling_counsultant_calendar_my_action" model="ir.actions.act_window">
+        <field name="name">My counseling calendar</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">counseling.calendar</field>
+        <field name="domain">[('counselor_id', '=', uid)]</field>
+        <field name="default">{'default_counselor_id': uid}</field>
+        <field name="view_mode">tree,form,calendar</field>
     </record>
     <record id="counseling_counsultant_calendar_action" model="ir.actions.act_window">
         <field name="name">Counseling calendar</field>
