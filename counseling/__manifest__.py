@@ -13,12 +13,11 @@
     'website': 'http://www.micronaet.it',
     'license': 'AGPL-3',
     'depends': [
-        #'basic_hms',
-        #'calendar',
         'xlsxwriter_report',
         'mail',
         ],
     'data': [
+        'security/counseling_group.xml',
         'security/ir.model.access.csv',
 
         'views/counseling_view.xml',
