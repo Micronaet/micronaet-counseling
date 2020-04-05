@@ -361,6 +361,17 @@
          </field>
      </record>-->
 
+     <!-- Inherit Form View to Modify it -->
+     <record id="res_partner_patient_view" model="ir.ui.view">
+         <field name="name">Patient</field>
+         <field name="model">res.partner</field>
+         <field name="inherit_id" ref="base.view_partner_form"/>
+         <field name="arch" type="xml">
+             <xpath expr="//field[@name='customer']" position="after">
+                 <field name="patient" />
+             </xpath>
+         </field>
+     </record>
      <record id="res_partner_patient_action" model="ir.actions.act_window">
          <field name="name">Patient</field>
          <field name="type">ir.actions.act_window</field>
