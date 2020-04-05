@@ -118,6 +118,7 @@
             <calendar string="Meetings" date_start="start_datetime" date_delay="duration"
                 event_open_popup="true"
                 event_limit="3"
+                day_length="8"
                 color="counselor_id">
                 <field name="name"/>
                 <field name="partner_id"/>
