@@ -18,17 +18,28 @@ class ResPartner(models.Model):
     consultant = fields.Boolean('Consultant')
 
 
+class CounselingCalendarCategory(models.Model):
+    _name = 'counseling.calendar.category'
+    _description = 'Counseling category'
+    _order = 'name'
+
+    name = fields.Char('Category', required=True)
+    cost = fields.Float(string='Cost')
+    revenue = fields.Float(string='Revenue')
+    note = fields.Text(string='Note')
+
+
 class CounselingCalendar(models.Model):
     _name = 'counseling.calendar'
     _description = 'Counseling calendar'
     _order = 'start_datetime'
     _inherit = ['mail.thread']
 
-    @api.onchange('start_datetime', 'duration')
-    def _onchange_duration(self):
-        if self.start_datetime:
-            self.stop = fields.Datetime.to_string(
-                self.start_datetime + timedelta(hours=self.duration))
+    #@api.onchange('start_datetime', 'duration')
+    #def _onchange_duration(self):
+    #    if self.start_datetime:
+    #        self.stop = fields.Datetime.to_string(
+    #            self.start_datetime + timedelta(hours=self.duration))
 
     name = fields.Char(
         'Meeting Subject', required=True,
@@ -45,17 +56,11 @@ class CounselingCalendar(models.Model):
         string='"Strategy event',
         states={'closed': [('readonly', True)]},
         )
-
-    state = fields.Selection([
-        ('draft', 'Unconfirmed'),
-        ('open', 'Confirmed'),
-        ('done', 'Done'),
-        ('closed', 'Closed'),  # Payed
-        ],
-        string='Status',
-        readonly=True,
-        track_visibility='onchange',
-        default='draft')
+    category_id = fields.Many2one(
+        comodel_name='counseling.calendar.category',
+        string='Category',
+        required=True,
+        )
 
     start_datetime = fields.Datetime(
         string='Start date',
@@ -90,7 +95,7 @@ class CounselingCalendar(models.Model):
         string='Secretary',
         states={'closed': [('readonly', True)]},
         help='People who take the appointment',
-        default=lambda self: self.uid,
+        default=lambda self: self._uid,
         required=True,
     )
     partner_id = fields.Many2one(
@@ -100,6 +105,19 @@ class CounselingCalendar(models.Model):
         track_visibility='onchange',
         required=True,
     )
+    state = fields.Selection([
+        ('draft', 'Unconfirmed'),
+        ('open', 'Confirmed'),
+        ('done', 'Done'),
+        ('closed', 'Closed'),  # Payed
+        ],
+        string='Status',
+        readonly=True,
+        track_visibility='onchange',
+        default='draft')
+
+    cost = fields.Float(string='Cost')
+    revenue = fields.Float(string='Revenue')
     # TODO Extra counselor?
 
 

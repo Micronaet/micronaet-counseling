@@ -23,6 +23,71 @@
          <field name="context">{}</field>
          <field name="domain">[]</field>
      </record>
+
+    <!--counseling.calendar-->
+    <record id="counseling_calendar_view_tree" model="ir.ui.view">
+        <field name="name">Counseling calendar tree</field>
+        <field name="model">counseling.calendar</field>
+        <field name="arch" type="xml">
+            <tree string="counselor_calendar_tree">
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+    <record id="counseling_calendar_view_form" model="ir.ui.view">
+        <field name="name">Counseling calendar form</field>
+        <field name="model">counseling.calendar</field>
+        <field name="arch" type="xml">
+            <form string="Counselor calendar">
+                <header>
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <group col="4">
+                        <field name="name" colspan="4"/>
+                        <field name="partner_id" />
+                        <field name="category_id" />
+                    </group>
+                    <notebook>
+                        <page name="page_meeting" string="Meeting">
+                            <group col="4">
+                                <field name="counselor_id" />
+                                <field name="secretary_id" />
+                                <field name="location" colspan="4"/>
+
+                                <field name="start_datetime" />
+                                <field name="duration" />
+                                <field name="stop_datetime" invisible="1"/>
+                            </group>
+                        </page>
+                        <page name="page_comment" string="Analisys">
+                            <group col="4">
+                                <separator string="Detail event:" colspan="4" />
+                                <field name="detail_event" colspan="4" nolabel="1"/>
+                                <separator string="Report event:" colspan="4" />
+                                <field name="report_event" colspan="4" nolabel="1" />
+                                <separator string="Stragegy event:" colspan="4" />
+                                <field name="strategy_event" colspan="4" nolabel="1" />
+                            </group>
+                        </page>
+                        <page name="page_cost" string="Cost">
+                            <group col="4">
+                                <field name="cost" />
+                                <field name="revenue" />
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="counseling_counsultant_calendar_action" model="ir.actions.act_window">
+        <field name="name">Counseling calendar</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">counseling.calendar</field>
+        <field name="view_mode">tree,form</field>
+    </record>
 <!--
      <record model="ir.ui.view" id="view_calendar_counseling_form">
          <field name="name">calendar.event.form</field>
@@ -90,12 +155,12 @@
              name="Appointments"
              sequence="10"
              />
-             <!--<menuitem
+             <menuitem
                  parent="menu_counseling_calendar"
-                 id="menu_counseling_calendar_event"
-                 action="calendar.action_calendar_event"
+                 id="menu_counseling_consultant_calendar"
+                 action="counseling_counsultant_calendar_action"
                  sequence="10"
-                 />-->
+                 />
          <menuitem
              parent="menu_counseling_root"
              id="menu_counseling_configuration"
@@ -110,7 +175,7 @@
                  />-->
              <menuitem
                  parent="menu_counseling_configuration"
-                 id="menu_counseling_configuration_doctor"
+                 id="menu_counseling_configuration_consultant"
                  action="action_res_users_consultant_form"
                  sequence="20"
                  />
