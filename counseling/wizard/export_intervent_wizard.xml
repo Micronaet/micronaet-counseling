@@ -38,8 +38,8 @@
         </record>
 
         <menuitem
-            parent="menu_counseling_calendar"
-            sequence="20"
+            parent="menu_counseling_management"
+            sequence="5"
             id="menu_calendar_event_excel_report_wizard"
             action="action_calendar_event_excel_report_wizard"
             />

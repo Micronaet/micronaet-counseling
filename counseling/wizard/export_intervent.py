@@ -155,5 +155,3 @@ class CalendarEventExcelReportWizard(models.TransientModel):
             ], style_code='text', col=1)
 
         return excel_pool.return_attachment('report_interventi')
-
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
