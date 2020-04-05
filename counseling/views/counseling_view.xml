@@ -109,13 +109,13 @@
         </field>
     </record>
 
+    <!--readonly_form_view_id="%(counseling.view_counseling_calendar_event_form_popup)s"-->
     <record id="view_counseling_calendar_counselor_calendar" model="ir.ui.view">
         <field name="name">Counseling Calendar</field>
         <field name="model">counseling.calendar</field>
         <field name="priority" eval="2"/>
         <field name="arch" type="xml">
             <calendar string="Meetings" date_start="start_datetime" date_delay="duration"
-                readonly_form_view_id="%(counseling.view_counseling_calendar_event_form_popup)s"
                 event_open_popup="true"
                 event_limit="3"
                 color="counselor_id">
