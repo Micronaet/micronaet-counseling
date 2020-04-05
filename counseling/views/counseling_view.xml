@@ -31,6 +31,14 @@
         <field name="arch" type="xml">
             <tree string="counselor_calendar_tree">
                 <field name="name"/>
+                <field name="partner_id" />
+                <field name="category_id" />
+                <field name="start_datetime" />
+                <field name="duration" />
+                <field name="counselor_id" />
+                <field name="secretary_id" />
+                <field name="location" />
+                <field name="state" />
             </tree>
         </field>
     </record>
@@ -94,6 +102,7 @@
                         <field name="counselor_id" />
                         <field name="location" />
                         <field name="category_id" />
+                        <field name="state" />
                     </group>
                 </sheet>
             </form>
@@ -112,6 +121,7 @@
                 color="counselor_id">
                 <field name="name"/>
                 <field name="partner_id"/>
+                <field name="state" />
                 <!--<field name="partner_ids" write_model="calendar.contacts" write_field="partner_id" avatar_field="image_small"/>-->
                 <!--<field name="is_highlighted" invisible="1"/>-->
             </calendar>
