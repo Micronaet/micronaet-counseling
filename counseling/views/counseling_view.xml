@@ -62,6 +62,33 @@
      </record>
 
     <!--counseling.calendar-->
+    <record model="ir.ui.view" id="view_counseling_calendar_search">
+        <field name="name">counseling.calendar.search</field>
+        <field name="model">counseling.calendar</field>
+        <field name="arch" type="xml">
+            <search string="Calendar search" version="7.0">
+                <field name="name" />
+                <field name="location" />
+                <field name="category_id" filter_domain="[('category_id.name','ilike',self)]"/>
+                <field name="counselor_id" filter_domain="[('counselor_id.name','ilike',self)]"/>
+                <field name="partner_id" filter_domain="[('partner_id.name','ilike',self)]"/>
+                <field name="secretary_id" filter_domain="[('secretary_id.name','ilike',self)]"/>
+
+                <filter name="state_draft" string="Draft state" domain="[('state','=','draft')]"/>
+                <filter name="state_draft" string="Confirmed state" domain="[('state','=','confirmed')]"/>
+                <filter name="state_draft" string="Done state" domain="[('state','=','done')]"/>
+                <filter name="state_draft" string="Closed state" domain="[('state','=','closed')]"/>
+                <group expand="0" string="Group By...">
+                    <filter name="group_category" string="Category" context="{'group_by': 'category_id'}"/>
+                    <filter name="group_counselor" string="Counselor" context="{'group_by': 'counselor_id'}"/>
+                    <filter name="group_secretary" string="Secretary" context="{'group_by': 'secretary_id'}"/>
+                    <filter name="group_partner" string="Partner" context="{'group_by': 'partner_id'}"/>
+                    <filter name="group_date" string="Date" context="{'group_by': 'start_datetime'}"/>
+                    <filter string="Status" context="{'group_by': 'state'}" />
+                </group>
+            </search>
+        </field>
+    </record>
     <record id="counseling_calendar_view_tree" model="ir.ui.view">
         <field name="name">Counseling calendar tree</field>
         <field name="model">counseling.calendar</field>
