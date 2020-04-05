@@ -213,6 +213,7 @@
          name="Consultorio"
          id="menu_counseling_root"
          sequence="0"
+         groups="group_counselor,group_admin,group_manager"
          />
          <menuitem
              parent="menu_counseling_root"
