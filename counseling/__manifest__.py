@@ -13,15 +13,16 @@
     'website': 'http://www.micronaet.it',
     'license': 'AGPL-3',
     'depends': [
-        'basic_hms',
-        'calendar',
+        #'basic_hms',
+        #'calendar',
         'xlsxwriter_report',
+        'mail',
         ],
     'data': [
-        #'security/ir.model.access.csv',
-        
+        'security/ir.model.access.csv',
+
         'views/counseling_view.xml',
-        'wizard/export_intervent_wizard.xml',
+        #'wizard/export_intervent_wizard.xml',
         ],
     'external_dependencies': {},
     'application': True,

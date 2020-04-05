@@ -2,17 +2,9 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
 import io
-import xlsxwriter
 import logging
-import base64
-import shutil
-from datetime import datetime, timedelta
 from odoo import models, fields, api
-from odoo.tools import (
-    DEFAULT_SERVER_DATE_FORMAT, 
-    DEFAULT_SERVER_DATETIME_FORMAT, 
-    DATETIME_FORMATS_MAP, 
-    )
+from datetime import datetime, timedelta, MAXYEAR
 
 
 _logger = logging.getLogger(__name__)
@@ -22,21 +14,124 @@ class ResPartner(models.Model):
     """ Model name: Partner
     """
     _inherit = 'res.partner'
-    
-    
+
     consultant = fields.Boolean('Consultant')
 
 
+class CounselingCalendar(models.Model):
+    _name = 'counseling.calendar'
+    _description = 'Counseling calendar'
+    _order = 'start_datetime'
+    _inherit = ['mail.thread']
+
+    @api.onchange('start_datetime', 'duration')
+    def _onchange_duration(self):
+        if self.start_datetime:
+            self.stop = fields.Datetime.to_string(
+                self.start_datetime + timedelta(hours=self.duration))
+
+    name = fields.Char(
+        'Meeting Subject', required=True,
+        states={'closed': [('readonly', True)]})
+    detail_event = fields.Text(
+        string='Detail event',
+        states={'closed': [('readonly', True)]},
+        )
+    report_event = fields.Text(
+        string='Report event',
+        states={'closed': [('readonly', True)]},
+        )
+    strategy_event = fields.Text(
+        string='"Strategy event',
+        states={'closed': [('readonly', True)]},
+        )
+
+    state = fields.Selection([
+        ('draft', 'Unconfirmed'),
+        ('open', 'Confirmed'),
+        ('done', 'Done'),
+        ('closed', 'Closed'),  # Payed
+        ],
+        string='Status',
+        readonly=True,
+        track_visibility='onchange',
+        default='draft')
+
+    start_datetime = fields.Datetime(
+        string='Start date',
+        track_visibility='onchange',
+        states={'closed': [('readonly', True)]},
+        required=True
+    )
+    stop_datetime = fields.Datetime(
+        string='Stop date',
+    )
+    duration = fields.Float(
+        'Duration', states={'closed': [('readonly', True)]},
+        track_visibility='onchange',
+    )
+    location = fields.Char(
+        'Location',
+        states={'closed': [('readonly', True)]},
+        track_visibility='onchange',
+        help='Location of Event'
+    )
+
+    # People:
+    counselor_id = fields.Many2one(
+        comodel_name='res.users',
+        string='Counselor',
+        states={'closed': [('readonly', True)]},
+        track_visibility='onchange',
+        required=True,
+    )
+    secretary_id = fields.Many2one(
+        comodel_name='res.users',
+        string='Secretary',
+        states={'closed': [('readonly', True)]},
+        help='People who take the appointment',
+        default=lambda self: self.uid,
+        required=True,
+    )
+    partner_id = fields.Many2one(
+        comodel_name='res.partner',
+        string='Partner',
+        states={'closed': [('readonly', True)]},
+        track_visibility='onchange',
+        required=True,
+    )
+    # TODO Extra counselor?
+
+
+'''
 class CalendarEvent(models.Model):
     """ Model name: Calendar event
     """
     _inherit = 'calendar.event'
+
+    @api.model
+    def log_message(self, subject, body, message_type='notification'):
+        """ Write log message
+        """    
+        #mail_pool = self.env['mail.thread']
+        body = ("""
+            <div class="o_mail_notification">
+                %s
+            </div>
+            """) % body
+
+        return self.sudo().message_post(
+            body=body, 
+            message_type=message_type, 
+            subject=subject,
+            )
 
     # Button events:
     @api.multi
     def call_skype(self):
         """ Skype call and start datatime in calendar event
         """ 
+        self.log_message('Skype call', 'Inizio chiamata skype...')
         self.start_call()
         return self.patient_id.call_skype()
         
@@ -44,6 +139,10 @@ class CalendarEvent(models.Model):
     def start_call(self):
         """ Skype call and stop datatime in calendar event
         """ 
+        self.log_message(
+            'Chiamata telefonica', 
+            'Inizio chiamata telefonica manuale')
+            
         dt_now = datetime.now()
         dt_end = dt_now + timedelta(seconds=self.duration * 3600.0)
         
@@ -59,6 +158,10 @@ class CalendarEvent(models.Model):
     def end_call(self):
         """ Skype call and stop datatime in calendar event
         """ 
+        self.log_message(
+            'Chiamata terminata', 
+            'Fine chiamata telefonica o con strumenti social')
+
         duration = datetime.now() - datetime.strptime(
             self.start_datetime, DEFAULT_SERVER_DATETIME_FORMAT)
             
@@ -152,4 +255,4 @@ class MedicalPatient(models.Model):
     skype_name = fields.Char('Skype name', size=64)
     telegram_name = fields.Char('Telegram name', size=64)
     hangout_name = fields.Char('Hangout name', size=64)
-
+'''

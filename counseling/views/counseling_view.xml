@@ -13,7 +13,7 @@
 	            <field name="consultant" />
             </tree>
          </field>
-     </record>     
+     </record>
      <record model="ir.actions.act_window" id="action_res_users_consultant_form">
          <field name="name">Consultant</field>
          <field name="res_model">res.users</field>
@@ -22,8 +22,8 @@
          <field name="view_id" ref="view_res_user_consultant_tree"/>
          <field name="context">{}</field>
          <field name="domain">[]</field>
-     </record>    
-    
+     </record>
+<!--
      <record model="ir.ui.view" id="view_calendar_counseling_form">
          <field name="name">calendar.event.form</field>
          <field name="model">calendar.event</field>
@@ -41,7 +41,7 @@
                   <newline/>
                   <button name="start_call" string="Start call" help="Manual start of call so update appointment time" type="object" colspan="1" icon="fa-bolt"/>
                   <button name="end_call" string="End call" help="Manual end of call so update appointment time" type="object" colspan="1" icon="fa-bolt"/>
-                 
+
              </xpath>
              <field name="start_datetime" position="before">
                   <field name="is_calling" invisible="1" />
@@ -49,11 +49,11 @@
                   <field name="skype_name" invisible="1" />
                   <field name="telegram_name" invisible="1" />
                   <field name="hangout_name" invisible="1" />
-                  
+
              </field>
          </field>
      </record>
-     
+
      <record model="ir.ui.view" id="view_medical_patient_social_form">
          <field name="name">medical.patient.form</field>
          <field name="model">medical.patient</field>
@@ -73,50 +73,46 @@
                          <field name="hangout_name" />
                          <button name="call_hangout" string="Hangout call" type="object" colspan="1" attrs="{'invisible': [('hangout_name','=',False)]}"/>
                          <button name="chat_hangout" string="Hangout chat" type="object" colspan="1" attrs="{'invisible': [('hangout_name','=',False)]}"/>
-                     </group>    
+                     </group>
                  </page>
-             </xpath>    
+             </xpath>
          </field>
-     </record>
-     
-     
-     <menuitem 
-         name="Consultorio" 
-         id="menu_counseling_root" 
+     </record>-->
+
+     <menuitem
+         name="Consultorio"
+         id="menu_counseling_root"
          sequence="0"
          />
-         <menuitem 
-             parent="menu_counseling_root" 
-             id="menu_counseling_calendar" 
+         <menuitem
+             parent="menu_counseling_root"
+             id="menu_counseling_calendar"
              name="Appointments"
              sequence="10"
              />
-             <menuitem 
-                 parent="menu_counseling_calendar" 
-                 id="menu_counseling_calendar_event" 
+             <!--<menuitem
+                 parent="menu_counseling_calendar"
+                 id="menu_counseling_calendar_event"
                  action="calendar.action_calendar_event"
                  sequence="10"
-                 />
-         <menuitem 
-             parent="menu_counseling_root" 
-             id="menu_counseling_configuration" 
+                 />-->
+         <menuitem
+             parent="menu_counseling_root"
+             id="menu_counseling_configuration"
              name="Configuration"
              sequence="99"
              />
-             <menuitem 
-                 parent="menu_counseling_configuration" 
-                 id="menu_counseling_configuration_patient" 
+             <!--<menuitem
+                 parent="menu_counseling_configuration"
+                 id="menu_counseling_configuration_patient"
                  action="basic_hms.action_medical_patient"
                  sequence="10"
-                 />
-             <menuitem 
-                 parent="menu_counseling_configuration" 
-                 id="menu_counseling_configuration_doctor" 
+                 />-->
+             <menuitem
+                 parent="menu_counseling_configuration"
+                 id="menu_counseling_configuration_doctor"
                  action="action_res_users_consultant_form"
                  sequence="20"
                  />
-             <!--action="basic_hms.action_medical_physician"-->    
-             
-         
-     
+
 </odoo>

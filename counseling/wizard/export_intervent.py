@@ -122,7 +122,6 @@ class CalendarEventExcelReportWizard(models.TransientModel):
         total = 0.0
         for move in sorted(move_pool.search(domain), 
                 key=lambda x: x.start_datetime):
-            row += 1
             partners = [p for p in move.partner_ids]
             if doctor and doctor.partner_id not in partners:
                 continue
@@ -132,6 +131,7 @@ class CalendarEventExcelReportWizard(models.TransientModel):
                 patient_name = move.patient_id.patient_id.name
                 
             total += move.duration
+            row += 1
             excel_pool.write_xls_line(ws_name, row, [
                 move.start_datetime,
                 move.stop_datetime,
