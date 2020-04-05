@@ -233,6 +233,7 @@
              id="menu_counseling_management"
              name="Management"
              sequence="20"
+             groups="group_admin,group_manager"
              />
              <menuitem
                  parent="menu_counseling_calendar"
@@ -245,6 +246,7 @@
              parent="menu_counseling_root"
              id="menu_counseling_configuration"
              name="Configuration"
+             groups="group_admin,group_manager"
              sequence="99"
              />
              <!--<menuitem
