@@ -30,6 +30,12 @@
              </form>
          </field>
      </record>
+    <record id="counseling_calendar_category_action" model="ir.actions.act_window">
+        <field name="name">Category</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">counseling.calendar.category</field>
+        <field name="view_mode">tree,form</field>
+    </record>
 
      <record model="ir.ui.view" id="view_res_user_consultant_tree">
          <field name="name">res.users.consultant.tree</field>
@@ -371,6 +377,12 @@
                  parent="menu_counseling_configuration"
                  id="menu_counseling_configuration_consultant"
                  action="action_res_users_consultant_form"
+                 sequence="20"
+                 />
+             <menuitem
+                 parent="menu_counseling_configuration"
+                 id="menu_counseling_calendar_category"
+                 action="counseling_calendar_category_action"
                  sequence="20"
                  />
 
