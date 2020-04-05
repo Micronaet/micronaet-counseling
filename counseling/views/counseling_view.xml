@@ -34,6 +34,7 @@
             </tree>
         </field>
     </record>
+
     <record id="counseling_calendar_view_form" model="ir.ui.view">
         <field name="name">Counseling calendar form</field>
         <field name="model">counseling.calendar</field>
@@ -81,12 +82,46 @@
             </form>
         </field>
     </record>
+    <record id="counseling.view_counseling_calendar_event_form_popup" model="ir.ui.view">
+        <field name="name">Counseling calendar popup form</field>
+        <field name="model">counseling.calendar</field>
+        <field name="arch" type="xml">
+            <form string="Counselor calendar">
+                <sheet>
+                    <group>
+                        <field name="name" colspan="4"/>
+                        <field name="partner_id" />
+                        <field name="counselor_id" />
+                        <field name="location" />
+                        <field name="category_id" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
 
+    <record id="view_counseling_calendar_counselor_calendar" model="ir.ui.view">
+        <field name="name">Counseling Calendar</field>
+        <field name="model">counseling.calendar</field>
+        <field name="priority" eval="2"/>
+        <field name="arch" type="xml">
+            <calendar string="Meetings" date_start="start_datetime" date_delay="duration"
+                readonly_form_view_id="%(counseling.view_counseling_calendar_event_form_popup)s"
+                event_open_popup="true"
+                event_limit="3"
+                color="counselor_id">
+                <field name="name"/>
+                <field name="partner_id"/>
+                <!--<field name="partner_ids" write_model="calendar.contacts" write_field="partner_id" avatar_field="image_small"/>-->
+                <!--<field name="is_highlighted" invisible="1"/>-->
+            </calendar>
+        </field>
+    </record>
     <record id="counseling_counsultant_calendar_action" model="ir.actions.act_window">
         <field name="name">Counseling calendar</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">counseling.calendar</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">tree,form,calendar</field>
     </record>
 <!--
      <record model="ir.ui.view" id="view_calendar_counseling_form">
