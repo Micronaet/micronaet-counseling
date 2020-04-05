@@ -18,6 +18,7 @@
                           <field name="counselor_id" />
                           <field name="patient_id" />
                           <field name="category_id" />
+                          <newline/>
 
                           <field name="from_date" />
                           <field name="to_date" />

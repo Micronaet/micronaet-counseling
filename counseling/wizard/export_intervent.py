@@ -46,8 +46,8 @@ class CalendarEventExcelReportWizard(models.TransientModel):
     patient_id = fields.Many2one('res.partner', 'Patient')
     category_id = fields.Many2one('counseling.calendar.category', 'Category')
 
-    from_date = fields.Date('From date >=', required=True)
-    to_date = fields.Date('To date <', required=True)
+    from_date = fields.Date('From date >=')  # required=True)
+    to_date = fields.Date('To date <')  # required=True)
     privacy = fields.Boolean(
         'Privacy', help='Hide patient data and intervent', default=True)
 
