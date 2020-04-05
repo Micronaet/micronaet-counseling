@@ -145,7 +145,7 @@
         <field name="priority" eval="30"/>
         <field name="arch" type="xml">
             <calendar string="Meetings" date_start="start_datetime" date_delay="duration"
-                event_open_popup="true" event_limit="3" color="counselor_id">
+                event_open_popup="true" event_limit="3" color="partner_id">
                 <field name="name"/>
                 <field name="partner_id"/>
                 <field name="state" />
