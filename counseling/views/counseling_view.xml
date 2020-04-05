@@ -432,6 +432,14 @@
 
          <menuitem
              parent="menu_counseling_root"
+             id="menu_counseling_report"
+             name="Report"
+             sequence="30"
+             groups="group_admin,group_manager"
+             />
+
+         <menuitem
+             parent="menu_counseling_root"
              id="menu_counseling_configuration"
              name="Configuration"
              groups="group_admin,group_manager"
