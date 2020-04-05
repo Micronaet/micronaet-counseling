@@ -111,9 +111,8 @@
 
     <!--readonly_form_view_id="%(counseling.view_counseling_calendar_event_form_popup)s"-->
     <record id="view_counseling_calendar_counselor_calendar" model="ir.ui.view">
-        <field name="name">Counseling Calendar</field>
+        <field name="name">Counseling counselor calendar</field>
         <field name="model">counseling.calendar</field>
-        <field name="priority" eval="2"/>
         <field name="arch" type="xml">
             <calendar string="Meetings" date_start="start_datetime" date_delay="duration"
                 event_open_popup="true" event_limit="3" color="counselor_id">
@@ -126,10 +125,10 @@
             </calendar>
         </field>
     </record>
-    <record id="view_counseling_calendar_counselor_calendar" model="ir.ui.view">
-        <field name="name">Counseling Calendar</field>
+    <record id="view_counseling_calendar_category_calendar" model="ir.ui.view">
+        <field name="name">Counseling category calendar</field>
         <field name="model">counseling.calendar</field>
-        <field name="priority" eval="2"/>
+        <field name="priority" eval="30"/>
         <field name="arch" type="xml">
             <calendar string="Meetings" date_start="start_datetime" date_delay="duration"
                 event_open_popup="true" event_limit="3" color="category_id">
@@ -145,12 +144,15 @@
         <field name="res_model">counseling.calendar</field>
         <field name="domain">[('counselor_id', '=', uid)]</field>
         <field name="default">{'default_counselor_id': uid}</field>
-        <field name="view_mode">tree,form,calendar</field>
+        <field name="view_id" ref="counseling.view_counseling_calendar_counselor_calendar"/>
+        <field name="view_mode">calendar,tree,form</field>
+
     </record>
     <record id="counseling_counsultant_calendar_action" model="ir.actions.act_window">
         <field name="name">Counseling calendar</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">counseling.calendar</field>
+        <field name="view_id" ref="counseling.view_counseling_calendar_category_calendar"/>
         <field name="view_mode">tree,form,calendar</field>
     </record>
 <!--
