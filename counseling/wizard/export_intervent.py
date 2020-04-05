@@ -89,7 +89,7 @@ class CalendarEventExcelReportWizard(models.TransientModel):
 
         if counselor:
             domain.append(
-                ('counselor_id', '=', counselor_id),
+                ('counselor_id', '=', counselor.id),
                 )
         if patient:
             domain.append(
@@ -97,7 +97,7 @@ class CalendarEventExcelReportWizard(models.TransientModel):
                 )
         if category:
             domain.append(
-                ('category_id', '=', category_id),
+                ('category_id', '=', category.id),
                 )
 
         # ---------------------------------------------------------------------
@@ -118,11 +118,11 @@ class CalendarEventExcelReportWizard(models.TransientModel):
         excel_pool.write_xls_line(ws_name, row, [
             u'Interventi con filtro: [Consulente %s], [Paziente %s], '
             'Periodo [%s, %s], [Categoria %s]' % (
-                (doctor.partner_id.name if doctor else 'Tutti'),
-                (patient.name if patient else 'Tutti'),
+                counselor.partner_id.name if counselor else 'Tutti',
+                patient.name if patient else 'Tutti',
                 from_date,
                 to_date,
-                category.name,
+                category.name if category else 'Tutte',
                 )
             ], style_code='title')
 
