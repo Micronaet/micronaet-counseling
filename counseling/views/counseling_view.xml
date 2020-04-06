@@ -116,7 +116,7 @@
                     <button name="wkf_go_draft" type="object" string="Restart" icon="fa-mail-reply fa-x2" attrs="{'invisible': [('state', '=', 'draft')]}"/>
                     <button name="wkf_go_open" type="object" string="Confirmed" icon="fa-thumbs-o-up fa-x2" attrs="{'invisible': [('state', '!=', 'draft')]}"/>
                     <button name="wkf_go_done" type="object" string="Done" icon="fa-thumbs-up fa-x2" attrs="{'invisible': [('state', '!=', 'open')]}"/>
-                    <button name="wkf_go_closed" type="object" string="Closed" icon="fa-money fa-x2" attrs="{'invisible': [('state', '!=', 'done')]}"/>
+                    <button name="wkf_go_closed" type="object" string="Closed" icon="fa-money fa-x2" attrs="{'invisible': [('state', '!=', 'done')]}" groups="counseling.group_admin,counseling.group_manager"/>
                     <field name="state" widget="statusbar"/>
                 </header>
                 <sheet>
