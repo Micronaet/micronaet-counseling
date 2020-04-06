@@ -8,6 +8,9 @@ from odoo.tools import (
     DEFAULT_SERVER_DATE_FORMAT,
     DEFAULT_SERVER_DATETIME_FORMAT,
 )
+from datetime import datetime, timedelta
+from dateutil.relativedelta import relativedelta
+
 
 _logger = logging.getLogger(__name__)
 
@@ -16,6 +19,74 @@ class ResPartner(models.Model):
     """ Model name: Partner
     """
     _inherit = 'res.partner'
+
+    # -------------------------------------------------------------------------
+    # Button events:
+    # -------------------------------------------------------------------------
+    # TODO
+    # Add: skype:username?add
+    # View profile: skype:username?userinfo
+    # Leave a voicemail: skype:username?voicemail
+    # Send file: skype:username?sendfile
+
+    @api.model
+    def social_url(self, social='skype', mode='call'):
+        """ Call skype URL
+            skype:username?<mode>
+        """
+        name = 'Social media: %s mode: %s' % (social, mode)
+
+        if social == 'skype':
+            url = 'skype:%s?%s' % (self.skype_name, mode)
+
+        elif social == 'telegram':
+            if mode == 'call':
+                return False
+            url = 'https://t.me/%s' % self.telegram_name
+
+        _logger.info('Calling: %s' % url)
+        return {
+            'name': name,
+            'res_model': 'ir.actions.act_url',
+            'type': 'ir.actions.act_url',
+            'target': 'self',
+            'url': url,
+        }
+
+    # -------------------------------------------------------------------------
+    # SKYPE:
+    # -------------------------------------------------------------------------
+    @api.multi
+    def call_skype(self):
+        """ Call skype call link
+        """
+        return self.social_url('skype', 'call')
+
+    @api.multi
+    def chat_skype(self):
+        """ Call skype chat link
+        """
+        return self.social_url('skype', 'chat')
+
+    # -------------------------------------------------------------------------
+    # TELEGRAM:
+    # -------------------------------------------------------------------------
+    @api.multi
+    def call_telegram(self):
+        """ Call Telegram call link
+        """
+        return self.social_url('telegram', 'call')
+
+    @api.multi
+    def chat_telegram(self):
+        """ Call Telegram chat link
+        """
+        return self.social_url('telegram', 'chat')
+
+    # Columns:
+    skype_name = fields.Char('Skype name', size=64)
+    telegram_name = fields.Char('Telegram name', size=64)
+    hangout_name = fields.Char('Hangout name', size=64)
 
     consultant = fields.Boolean('Consultant')
     patient = fields.Boolean('Patient')
@@ -38,7 +109,54 @@ class CounselingCalendar(models.Model):
     _order = 'start_datetime'
     _inherit = ['mail.thread']
 
-    '''@api.model
+
+    # -------------------------------------------------------------------------
+    # workflow button
+    # -------------------------------------------------------------------------
+    @api.multi
+    def wkf_go_draft(self):
+        """ Go in draft mode
+        """
+        return self.state == 'draft'
+
+    @api.multi
+    def wkf_go_open(self):
+        """ Go in open mode
+        """
+        return self.state == 'open'
+
+    @api.multi
+    def wkf_go_done(self):
+        """ Go in done mode
+        """
+        return self.state == 'done'
+
+    @api.multi
+    def wkf_go_closed(self):
+        """ Go in closed mode
+        """
+        return self.state == 'closed'
+
+    # -------------------------------------------------------------------------
+    # Utility
+    # -------------------------------------------------------------------------
+    @api.model
+    def log_message(self, subject, body, message_type='notification'):
+        """ Write log message
+        """
+        body = ("""
+            <div class="o_mail_notification">
+                %s
+            </div>
+            """) % body
+
+        return self.sudo().message_post(
+            body=body,
+            message_type=message_type,
+            subject=subject,
+            )
+
+    @api.model
     def date_to_datetime(self, userdate):
         """ Convert date values expressed in user's timezone to
         server-side UTC timestamp, assuming a default arbitrary
@@ -47,6 +165,7 @@ class CounselingCalendar(models.Model):
         :param str userdate: date string in in user time zone
         :return: UTC datetime string for server-side use
         """
+        import pdb; pdb.set_trace()
         context = self.env.context
         user_date = datetime.strptime(
             userdate[:10],
@@ -56,6 +175,7 @@ class CounselingCalendar(models.Model):
         else:
             tz_name = self.env['res.users'].browse(self.uid).tz
         if tz_name:
+
             import pytz
             utc = pytz.timezone('UTC')
             context_tz = pytz.timezone(tz_name)
@@ -63,7 +183,20 @@ class CounselingCalendar(models.Model):
             local_timestamp = context_tz.localize(user_datetime, is_dst=False)
             user_datetime = local_timestamp.astimezone(utc)
             return user_datetime.strftime(DEFAULT_SERVER_DATETIME_FORMAT)
-        return user_date.strftime(DEFAULT_SERVER_DATETIME_FORMAT)'''
+            '''
+            import pytz
+            utc = pytz.timezone('UTC')
+            user_datetime = datetime.strptime(
+                userdate,
+                DEFAULT_SERVER_DATETIME_FORMAT)
+
+
+            context_tz = pytz.timezone(tz_name)
+            local_timestamp = context_tz.localize(user_datetime, is_dst=False)
+            user_datetime = local_timestamp.astimezone(utc)
+            return user_datetime.strftime(DEFAULT_SERVER_DATETIME_FORMAT)
+            '''
+        return user_date.strftime(DEFAULT_SERVER_DATETIME_FORMAT)
 
     @api.depends('start_datetime', 'duration')
     def _get_stop_datetime(self):
@@ -149,6 +282,14 @@ class CounselingCalendar(models.Model):
         track_visibility='onchange',
         required=True,
     )
+
+    skype_name = fields.Char(
+        'Skype name', size=64, related='partner_id.skype_name')
+    telegram_name = fields.Char(
+        'Telegram name', size=64, related='partner_id.telegram_name')
+    hangout_name = fields.Char(
+        'Hangout name', size=64, related='partner_id.hangout_name')
+
     state = fields.Selection([
         ('draft', 'Unconfirmed'),
         ('open', 'Confirmed'),
@@ -170,23 +311,6 @@ class CalendarEvent(models.Model):
     """ Model name: Calendar event
     """
     _inherit = 'calendar.event'
-
-    @api.model
-    def log_message(self, subject, body, message_type='notification'):
-        """ Write log message
-        """    
-        #mail_pool = self.env['mail.thread']
-        body = ("""
-            <div class="o_mail_notification">
-                %s
-            </div>
-            """) % body
-
-        return self.sudo().message_post(
-            body=body, 
-            message_type=message_type, 
-            subject=subject,
-            )
 
     # Button events:
     @api.multi
@@ -238,83 +362,6 @@ class CalendarEvent(models.Model):
     is_calling = fields.Boolean('Is calling')
 
     patient_id = fields.Many2one('medical.patient', 'Paziente', required=True)
-    skype_name = fields.Char(
-        'Skype name', size=64, related='patient_id.skype_name')
-    telegram_name = fields.Char(
-        'Telegram name', size=64, related='patient_id.telegram_name')
-    hangout_name = fields.Char(
-        'Hangout name', size=64, related='patient_id.hangout_name')
 
 
-class MedicalPatient(models.Model):
-    """ Model name: Calendar event
-    """
-    
-    _inherit = 'medical.patient'
-    
-    # Button events:
-    # TODO 
-    # Add: skype:username?add
-    # View profile: skype:username?userinfo
-    # Leave a voicemail: skype:username?voicemail
-    # Send file: skype:username?sendfile
-    
-    @api.model
-    def social_url(self, social='skype', mode='call'):
-        """ Call skype URL
-            skype:username?<mode>
-        """
-        name = 'Social media: %s mode: %s' % (social, mode)
-        
-        if social == 'skype':
-            url = 'skype:%s?%s' % (self.skype_name, mode)
-
-        elif social == 'telegram':
-            if mode == 'call':
-                return False
-            url = 'https://t.me/%s' % self.telegram_name
-
-        _logger.info('Calling: %s' % url)
-        return {
-            'name': name,
-            'res_model': 'ir.actions.act_url',
-            'type': 'ir.actions.act_url',
-            'target': 'self',
-            'url': url,
-            }
-            
-    # -------------------------------------------------------------------------
-    # SKYPE:
-    # -------------------------------------------------------------------------
-    @api.multi
-    def call_skype(self):
-        """ Call skype call link
-        """
-        return self.social_url('skype', 'call')
-        
-    @api.multi
-    def chat_skype(self):
-        """ Call skype chat link
-        """
-        return self.social_url('skype', 'chat')
-
-    # -------------------------------------------------------------------------
-    # TELEGRAM:
-    # -------------------------------------------------------------------------
-    @api.multi
-    def call_telegram(self):
-        """ Call Telegram call link
-        """
-        return self.social_url('telegram', 'call')
-        
-    @api.multi
-    def chat_telegram(self):
-        """ Call Telegram chat link
-        """
-        return self.social_url('telegram', 'chat')
-
-    # Columns:
-    skype_name = fields.Char('Skype name', size=64)
-    telegram_name = fields.Char('Telegram name', size=64)
-    hangout_name = fields.Char('Hangout name', size=64)
 '''

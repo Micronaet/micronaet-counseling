@@ -13,6 +13,7 @@
     'website': 'http://www.micronaet.it',
     'license': 'AGPL-3',
     'depends': [
+        'base',
         'xlsxwriter_report',
         'mail',
         ],

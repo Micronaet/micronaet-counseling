@@ -24,7 +24,6 @@
 import logging
 from odoo import api, fields, models, tools, exceptions, SUPERUSER_ID
 
-
 _logger = logging.getLogger(__name__)
 
 
@@ -63,7 +62,7 @@ class CalendarEventExcelReportWizard(models.TransientModel):
     def extract_event_report(self):
         """ Extract Excel report
         """
-        attendance = self.env['counseling.calendar']
+        attendance_pool = self.env['counseling.calendar']
         excel_pool = self.env['excel.report']
 
         # Wizard parameters:
@@ -130,7 +129,7 @@ class CalendarEventExcelReportWizard(models.TransientModel):
         excel_pool.write_xls_line(ws_name, row, header,
                                   style_code='header')
         total = 0.0
-        for attendance in sorted(attendance.search(domain),
+        for attendance in sorted(attendance_pool.search(domain),
                                  key=lambda x: x.start_datetime):
             if privacy:
                 patient_name = 'ID %s' % attendance.partner_id.id
@@ -140,6 +139,7 @@ class CalendarEventExcelReportWizard(models.TransientModel):
             total += attendance.duration
             row += 1
             excel_pool.write_xls_line(ws_name, row, [
+                #attendance_pool.date_to_datetime(attendance.start_datetime),
                 attendance.start_datetime,
                 attendance.stop_datetime,
                 (self.format_hour(attendance.duration), 'number'),

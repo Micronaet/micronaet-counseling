@@ -93,7 +93,7 @@
         <field name="name">Counseling calendar tree</field>
         <field name="model">counseling.calendar</field>
         <field name="arch" type="xml">
-            <tree string="counselor_calendar_tree">
+            <tree string="Counselor Calendar">
                 <field name="name"/>
                 <field name="partner_id" />
                 <field name="category_id" />
@@ -113,6 +113,10 @@
         <field name="arch" type="xml">
             <form string="Counselor calendar">
                 <header>
+                    <button name="wkf_go_draft" type="object" string="Restart" icon="fa-mail-reply fa-x2" state=""/>
+                    <button name="wkf_go_open" type="object" string="Confirmed" icon="fa-thumbs-o-up fa-x2"/>
+                    <button name="wkf_go_done" type="object" string="Done" icon="fa-thumbs-up fa-x2"/>
+                    <button name="wkf_go_closed" type="object" string="Closed" icon="fa-money fa-x2"/>
                     <field name="state" widget="statusbar"/>
                 </header>
                 <sheet>
@@ -120,11 +124,14 @@
                         <field name="name" colspan="4"/>
                         <field name="partner_id" />
                         <field name="category_id" />
+                        <field name="skype_name" invisible="1" />
+                        <field name="telegram_name" invisible="1" />
+                        <field name="hangout_name" invisible="1" />
                     </group>
                     <notebook>
                         <page name="page_meeting" string="Meeting">
                             <group col="4">
-                                <field name="counselor_id" />
+                                <field name="counselor_id" options="{'no_create': True}"/>
                                 <field name="secretary_id" />
                                 <field name="location" colspan="4"/>
 
@@ -139,7 +146,7 @@
                                 <field name="detail_event" colspan="4" nolabel="1"/>
                                 <separator string="Report event:" colspan="4" />
                                 <field name="report_event" colspan="4" nolabel="1" />
-                                <separator string="Stragegy event:" colspan="4" />
+                                <separator string="Strategy event:" colspan="4" />
                                 <field name="strategy_event" colspan="4" nolabel="1" />
                             </group>
                         </page>
@@ -150,7 +157,18 @@
                             </group>
                         </page>
                     </notebook>
+                    <button name="call_skype" string="Skype call" help="Skype call open and start appointment!" type="object" colspan="1" attrs="{'invisible': ['|',('state', '!=', 'confirmed'),('skype_name','=',False)]}" icon="fa-skype"/>
+                    <button name="call_telegram" string="Telegram call" help="Telegram call open and start appointment!" type="object" colspan="1" attrs="{'invisible': ['|',('state', '!=', 'confirmed'),('telegram_name','=',False)]}" icon="fa-telegram"/>
+                    <button name="call_hangout" string="hangout call" help="Hangout call open and start appointment!" type="object" colspan="1" attrs="{'invisible': ['|',('state', '!=', 'confirmed'),('hangout_name','=',False)]}" icon="fa-skype"/>
+                    <newline/>
+                    <button name="start_call" string="Start call" help="Manual start of call so update appointment time" type="object" colspan="1" icon="fa-bolt" attrs="{'invisible': [('state', '!=', 'confirmed')]}"/>
+                    <button name="end_call" string="End call" help="Manual end of call so update appointment time" type="object" colspan="1" icon="fa-bolt" attrs="{'invisible': [('state', '!=', 'confirmed')]}"/>
+
                 </sheet>
+                <div class="oe_chatter">
+                     <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
             </form>
         </field>
     </record>
@@ -315,6 +333,7 @@
                  <attribute name="domain">[('consultant', '=', True)]</attribute>
                  <attribute name="options">{'no_create': True}</attribute>
              </field>
+
              <xpath expr="//notebook" position="after">
                   <button name="call_skype" string="Skype call" help="Skype call open and start appointment!" type="object" colspan="1" attrs="{'invisible': ['|',('is_calling', '=', True),('skype_name','=',False)]}" icon="fa-skype"/>
                   <button name="call_telegram" string="Telegram call" help="Telegram call open and start appointment!" type="object" colspan="1" attrs="{'invisible': ['|',('is_calling', '=', True),('telegram_name','=',False)]}" icon="fa-telegram"/>
@@ -334,16 +353,19 @@
 
              </field>
          </field>
-     </record>
+     </record>-->
 
-     <record model="ir.ui.view" id="view_medical_patient_social_form">
-         <field name="name">medical.patient.form</field>
-         <field name="model">medical.patient</field>
-         <field name="inherit_id" ref="basic_hms.medical_patients_form_view"/>
+     <!-- Inherit Form View to Modify it -->
+     <record id="res_partner_patient_view" model="ir.ui.view">
+         <field name="name">Patient</field>
+         <field name="model">res.partner</field>
+         <field name="inherit_id" ref="base.view_partner_form"/>
          <field name="arch" type="xml">
              <xpath expr="//notebook/page[1]" position="after">
                  <page string="Social">
                      <group colspan="4" col="4">
+                         <field name="patient" />
+                         <newline/>
                          <field name="skype_name" />
                          <button name="call_skype" string="Skype call" type="object" colspan="1" attrs="{'invisible': [('skype_name','=',False)]}" icon="fa-skype"/>
                          <button name="chat_skype" string="Skype chat" type="object" colspan="1" attrs="{'invisible': [('skype_name','=',False)]}" icon="fa-skype"/>
@@ -358,18 +380,6 @@
                      </group>
                  </page>
              </xpath>
-         </field>
-     </record>-->
-
-     <!-- Inherit Form View to Modify it -->
-     <record id="res_partner_patient_view" model="ir.ui.view">
-         <field name="name">Patient</field>
-         <field name="model">res.partner</field>
-         <field name="inherit_id" ref="base.view_partner_form"/>
-         <field name="arch" type="xml">
-             <field name="supplier" position="after">
-                 <field name="patient" />
-             </field>
          </field>
      </record>
      <record id="res_partner_patient_action" model="ir.actions.act_window">
