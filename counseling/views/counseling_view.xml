@@ -132,7 +132,7 @@
                         <page name="page_meeting" string="Appointment">
                             <group col="4">
                                 <field name="counselor_id" options="{'no_create': True}"/>
-                                <field name="secretary_id" />
+                                <field name="secretary_id" options="{'no_create': True}"/>
                                 <field name="location" colspan="4"/>
 
                                 <field name="start_datetime" />
