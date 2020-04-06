@@ -65,6 +65,13 @@ class CalendarEventExcelReportWizard(models.TransientModel):
         attendance_pool = self.env['counseling.calendar']
         excel_pool = self.env['excel.report']
 
+        # Convert:
+        translate_state = {
+            'draft': 'Bozza',
+            'open': 'Confermato',
+            'done': 'Fatto',
+            'closed': 'Chiuso',
+        }
         # Wizard parameters:
         from_date = self.from_date
         to_date = self.to_date
@@ -103,8 +110,9 @@ class CalendarEventExcelReportWizard(models.TransientModel):
         # ---------------------------------------------------------------------
         # Excel file configuration: # TODO
         header = (
-            'Data', 'Alle', 'Durata', 'Paziente', 'Consulente', 'Categoria')
-        column_width = (18, 18, 7, 25, 30, 25)
+            'Data', 'Alle', 'Durata', 'Paziente', 'Consulente', 'Categoria',
+            'Stato')
+        column_width = (18, 18, 7, 25, 30, 25, 15)
 
         # ---------------------------------------------------------------------
         # Write detail:
@@ -137,16 +145,33 @@ class CalendarEventExcelReportWizard(models.TransientModel):
                 patient_name = attendance.partner_id.name
 
             total += attendance.duration
+
+            # Color state:
+            state = attendance.state
+            if state == 'draft':
+                number_color = 'number_draft'
+                text_color = 'text_draft'
+            elif state == 'open':
+                number_color = 'number_pending'
+                text_color = 'text_pending'
+            elif state == 'closed':
+                number_color = 'number_ok'
+                text_color = 'text_ok'
+            else:  # done was default
+                number_color = 'number'
+                text_color = 'text'
+
             row += 1
             excel_pool.write_xls_line(ws_name, row, [
                 #attendance_pool.date_to_datetime(attendance.start_datetime),
                 attendance.start_datetime,
                 attendance.stop_datetime,
-                (self.format_hour(attendance.duration), 'number'),
+                (self.format_hour(attendance.duration), number_color),
                 patient_name,
                 attendance.counselor_id.name,
                 attendance.category_id.name or '/',
-                ], style_code='text')
+                translate_state.get(state, '/'),
+                ], style_code=text_color)
 
         row += 1
         excel_pool.write_xls_line(ws_name, row, [
