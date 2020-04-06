@@ -109,6 +109,57 @@ class CounselingCalendar(models.Model):
     _order = 'start_datetime'
     _inherit = ['mail.thread']
 
+    # -------------------------------------------------------------------------
+    # Button events:
+    # -------------------------------------------------------------------------
+    @api.multi
+    def call_skype(self):
+        """ Skype call and start datetime in calendar event
+        """
+        self.start_call('skype')
+        return self.partner_id.call_skype()
+
+    @api.multi
+    def start_call_manual(self):
+        self.start_call('manuale')
+
+    @api.multi
+    def end_call_manual(self):
+        """ Skype call and stop datetime in calendar event
+        """
+        self.log_message(
+            'Chiamata terminata',
+            'Fine chiamata telefonica o con strumenti social')
+
+        duration = datetime.now() - datetime.strptime(
+            self.start_datetime, DEFAULT_SERVER_DATETIME_FORMAT)
+
+        return self.write({
+            'duration': duration.total_seconds() / 3600.0,
+            'state': 'done',
+        })
+
+    # -------------------------------------------------------------------------
+    # Utility:
+    # -------------------------------------------------------------------------
+    @api.model
+    def start_call(self, mode):
+        """ Skype call and stop datatime in calendar event
+        """
+        self.log_message(
+            'Chiamata telefonica',
+            'Inizio chiamata telefonica %s' % mode)
+
+        dt_now = datetime.now()
+        #dt_end = dt_now + timedelta(seconds=self.duration * 3600.0)
+
+        return self.write({
+            'start_datetime': datetime.strftime(
+                dt_now, DEFAULT_SERVER_DATETIME_FORMAT),
+            # 'stop_datetime': datetime.strftime(
+            #    dt_end, DEFAULT_SERVER_DATETIME_FORMAT),
+            # 'is_calling': True,
+        })
 
     # -------------------------------------------------------------------------
     # workflow button
@@ -117,25 +168,25 @@ class CounselingCalendar(models.Model):
     def wkf_go_draft(self):
         """ Go in draft mode
         """
-        return self.state == 'draft'
+        return self.write({'state': 'draft'})
 
     @api.multi
     def wkf_go_open(self):
         """ Go in open mode
         """
-        return self.state == 'open'
+        return self.write({'state': 'open'})
 
     @api.multi
     def wkf_go_done(self):
         """ Go in done mode
         """
-        return self.state == 'done'
+        return self.write({'state': 'done'})
 
     @api.multi
     def wkf_go_closed(self):
         """ Go in closed mode
         """
-        return self.state == 'closed'
+        return self.write({'state': 'closed'})
 
     # -------------------------------------------------------------------------
     # Utility
@@ -304,64 +355,3 @@ class CounselingCalendar(models.Model):
     cost = fields.Float(string='Cost')
     revenue = fields.Float(string='Revenue')
     # TODO Extra counselor?
-
-
-'''
-class CalendarEvent(models.Model):
-    """ Model name: Calendar event
-    """
-    _inherit = 'calendar.event'
-
-    # Button events:
-    @api.multi
-    def call_skype(self):
-        """ Skype call and start datatime in calendar event
-        """ 
-        self.log_message('Skype call', 'Inizio chiamata skype...')
-        self.start_call()
-        return self.patient_id.call_skype()
-        
-    @api.multi
-    def start_call(self):
-        """ Skype call and stop datatime in calendar event
-        """ 
-        self.log_message(
-            'Chiamata telefonica', 
-            'Inizio chiamata telefonica manuale')
-            
-        dt_now = datetime.now()
-        dt_end = dt_now + timedelta(seconds=self.duration * 3600.0)
-        
-        return self.write({
-            'start_datetime': datetime.strftime(
-                dt_now, DEFAULT_SERVER_DATETIME_FORMAT),
-            'stop_datetime': datetime.strftime(
-                dt_end, DEFAULT_SERVER_DATETIME_FORMAT),
-            'is_calling': True,
-            })
-
-    @api.multi
-    def end_call(self):
-        """ Skype call and stop datatime in calendar event
-        """ 
-        self.log_message(
-            'Chiamata terminata', 
-            'Fine chiamata telefonica o con strumenti social')
-
-        duration = datetime.now() - datetime.strptime(
-            self.start_datetime, DEFAULT_SERVER_DATETIME_FORMAT)
-            
-        return self.write({
-            'duration': duration.total_seconds() / 3600.0,
-            'is_calling': False,
-            })
-        
-    # -------------------------------------------------------------------------
-    #                                   COLUMNS:
-    # -------------------------------------------------------------------------
-    is_calling = fields.Boolean('Is calling')
-
-    patient_id = fields.Many2one('medical.patient', 'Paziente', required=True)
-
-
-'''

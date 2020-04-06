@@ -113,10 +113,10 @@
         <field name="arch" type="xml">
             <form string="Counselor calendar">
                 <header>
-                    <button name="wkf_go_draft" type="object" string="Restart" icon="fa-mail-reply fa-x2" state=""/>
-                    <button name="wkf_go_open" type="object" string="Confirmed" icon="fa-thumbs-o-up fa-x2"/>
-                    <button name="wkf_go_done" type="object" string="Done" icon="fa-thumbs-up fa-x2"/>
-                    <button name="wkf_go_closed" type="object" string="Closed" icon="fa-money fa-x2"/>
+                    <button name="wkf_go_draft" type="object" string="Restart" icon="fa-mail-reply fa-x2" attrs="{'invisible': [('state', '=', 'draft')]}"/>
+                    <button name="wkf_go_open" type="object" string="Confirmed" icon="fa-thumbs-o-up fa-x2" attrs="{'invisible': [('state', '!=', 'draft')]}"/>
+                    <button name="wkf_go_done" type="object" string="Done" icon="fa-thumbs-up fa-x2" attrs="{'invisible': [('state', '!=', 'open')]}"/>
+                    <button name="wkf_go_closed" type="object" string="Closed" icon="fa-money fa-x2" attrs="{'invisible': [('state', '!=', 'done')]}"/>
                     <field name="state" widget="statusbar"/>
                 </header>
                 <sheet>
@@ -136,8 +136,9 @@
                                 <field name="location" colspan="4"/>
 
                                 <field name="start_datetime" />
-                                <field name="duration" />
+                                <field name="duration" widget="float_time"/>
                                 <field name="stop_datetime" invisible="1"/>
+
                             </group>
                         </page>
                         <page name="page_comment" string="Analisys">
@@ -157,13 +158,14 @@
                             </group>
                         </page>
                     </notebook>
-                    <button name="call_skype" string="Skype call" help="Skype call open and start appointment!" type="object" colspan="1" attrs="{'invisible': ['|',('state', '!=', 'confirmed'),('skype_name','=',False)]}" icon="fa-skype"/>
-                    <button name="call_telegram" string="Telegram call" help="Telegram call open and start appointment!" type="object" colspan="1" attrs="{'invisible': ['|',('state', '!=', 'confirmed'),('telegram_name','=',False)]}" icon="fa-telegram"/>
-                    <button name="call_hangout" string="hangout call" help="Hangout call open and start appointment!" type="object" colspan="1" attrs="{'invisible': ['|',('state', '!=', 'confirmed'),('hangout_name','=',False)]}" icon="fa-skype"/>
-                    <newline/>
-                    <button name="start_call" string="Start call" help="Manual start of call so update appointment time" type="object" colspan="1" icon="fa-bolt" attrs="{'invisible': [('state', '!=', 'confirmed')]}"/>
-                    <button name="end_call" string="End call" help="Manual end of call so update appointment time" type="object" colspan="1" icon="fa-bolt" attrs="{'invisible': [('state', '!=', 'confirmed')]}"/>
-
+                    <group col="4">
+                        <button name="call_skype" string="Skype call" help="Skype call open and start appointment!" type="object" colspan="1" attrs="{'invisible': ['|',('state', '!=', 'open'),('skype_name','=',False)]}" icon="fa-skype"/>
+                        <button name="call_telegram" string="Telegram call" help="Telegram call open and start appointment!" type="object" colspan="1" attrs="{'invisible': ['|',('state', '!=', 'open'),('telegram_name','=',False)]}" icon="fa-telegram"/>
+                        <button name="call_hangout" string="hangout call" help="Hangout call open and start appointment!" type="object" colspan="1" attrs="{'invisible': ['|',('state', '!=', 'open'),('hangout_name','=',False)]}" icon="fa-skype"/>
+                        <newline/>
+                        <button name="start_call_manual" string="Start call" help="Manual start of call so update appointment time" type="object" colspan="1" icon="fa-bolt" attrs="{'invisible': [('state', '!=', 'open')]}"/>
+                        <button name="end_call_manual" string="End call" help="Manual end of call so update appointment time" type="object" colspan="1" icon="fa-bolt" attrs="{'invisible': [('state', '!=', 'open')]}"/>
+                    </group>
                 </sheet>
                 <div class="oe_chatter">
                      <field name="message_follower_ids" widget="mail_followers"/>
