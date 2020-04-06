@@ -1,7 +1,6 @@
 <?xml version="1.0"?>
 <openerp>
     <data>
-
         <record id="view_calendar_event_excel_report_wizard" model="ir.ui.view">
             <field name="name">Export event report</field>
             <field name="model">calendar.event.excel.report.wizard</field>

@@ -6,8 +6,8 @@
          <field name="arch" type="xml">
              <tree string="Category">
                  <field name="name"/>
-                 <field name="cost"/>
-                 <field name="revenue"/>
+                 <field name="cost" groups="counseling.group_admin,counseling.group_manager"/>
+                 <field name="revenue" groups="counseling.group_admin,counseling.group_manager"/>
                  <field name="note"/>
              </tree>
          </field>
@@ -21,8 +21,8 @@
                      <group col="4">
                          <field name="name"/>
                          <newline />
-                         <field name="cost"/>
-                         <field name="revenue"/>
+                         <field name="cost" groups="counseling.group_admin,counseling.group_manager"/>
+                         <field name="revenue" groups="counseling.group_admin,counseling.group_manager"/>
                          <separator string="Note"/>
                          <field name="note" colspan="4"/>
                      </group>
@@ -151,7 +151,7 @@
                                 <field name="strategy_event" colspan="4" nolabel="1" />
                             </group>
                         </page>
-                        <page name="page_cost" string="Cost">
+                        <page name="page_cost" string="Cost" groups="counseling.group_admin,counseling.group_manager">
                             <group col="4">
                                 <field name="cost" />
                                 <field name="revenue" />
@@ -325,38 +325,6 @@
         <field name="view_mode">calendar,tree,form,pivot</field>
     </record>
 
-<!--
-     <record model="ir.ui.view" id="view_calendar_counseling_form">
-         <field name="name">calendar.event.form</field>
-         <field name="model">calendar.event</field>
-         <field name="inherit_id" ref="calendar.view_calendar_event_form"/>
-         <field name="arch" type="xml">
-             <field name="partner_ids" position="attributes">
-                 <attribute name="domain">[('consultant', '=', True)]</attribute>
-                 <attribute name="options">{'no_create': True}</attribute>
-             </field>
-
-             <xpath expr="//notebook" position="after">
-                  <button name="call_skype" string="Skype call" help="Skype call open and start appointment!" type="object" colspan="1" attrs="{'invisible': ['|',('is_calling', '=', True),('skype_name','=',False)]}" icon="fa-skype"/>
-                  <button name="call_telegram" string="Telegram call" help="Telegram call open and start appointment!" type="object" colspan="1" attrs="{'invisible': ['|',('is_calling', '=', True),('telegram_name','=',False)]}" icon="fa-telegram"/>
-                  <button name="call_hangout" string="hangout call" help="Hangout call open and start appointment!" type="object" colspan="1" attrs="{'invisible': ['|',('is_calling', '=', True),('hangout_name','=',False)]}" icon="fa-skype"/>
-
-                  <newline/>
-                  <button name="start_call" string="Start call" help="Manual start of call so update appointment time" type="object" colspan="1" icon="fa-bolt"/>
-                  <button name="end_call" string="End call" help="Manual end of call so update appointment time" type="object" colspan="1" icon="fa-bolt"/>
-
-             </xpath>
-             <field name="start_datetime" position="before">
-                  <field name="is_calling" invisible="1" />
-                  <field name="patient_id" />
-                  <field name="skype_name" invisible="1" />
-                  <field name="telegram_name" invisible="1" />
-                  <field name="hangout_name" invisible="1" />
-
-             </field>
-         </field>
-     </record>-->
-
      <!-- Inherit Form View to Modify it -->
      <record id="res_partner_patient_view" model="ir.ui.view">
          <field name="name">Patient</field>
@@ -405,13 +373,14 @@
          name="Consultorio"
          id="menu_counseling_root"
          sequence="0"
-         groups="group_counselor,group_admin,group_manager"
+         groups="counseling.group_counselor,counseling.group_admin,counseling.group_manager"
          />
          <menuitem
              parent="menu_counseling_root"
              id="menu_counseling_calendar"
              name="Appointments"
              sequence="10"
+             groups="counseling.group_counselor"
              />
              <menuitem
                  parent="menu_counseling_calendar"
@@ -437,7 +406,7 @@
              id="menu_counseling_management"
              name="Management"
              sequence="20"
-             groups="group_admin,group_manager"
+             groups="counseling.group_admin,counseling.group_manager"
              />
              <menuitem
                  parent="menu_counseling_management"
@@ -469,14 +438,14 @@
              id="menu_counseling_report"
              name="Report"
              sequence="30"
-             groups="group_admin,group_manager"
+             groups="counseling.group_admin,counseling.group_manager"
              />
 
          <menuitem
              parent="menu_counseling_root"
              id="menu_counseling_configuration"
              name="Configuration"
-             groups="group_admin,group_manager"
+             groups="counseling.group_admin,counseling.group_manager"
              sequence="99"
              />
              <menuitem
