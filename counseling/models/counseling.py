@@ -272,28 +272,29 @@ class CounselingCalendar(models.Model):
         'Meeting Subject', required=True,
         states={'closed': [('readonly', True)]})
     detail_event = fields.Text(
-        string='Detail event',
+        string='Argument appointment',
         states={'closed': [('readonly', True)]},
         )
     report_event = fields.Text(
-        string='Report event',
+        string='Result appointment',
         states={'closed': [('readonly', True)]},
         )
     strategy_event = fields.Text(
-        string='"Strategy event',
+        string='Strategy appointment',
         states={'closed': [('readonly', True)]},
         )
     category_id = fields.Many2one(
         comodel_name='counseling.calendar.category',
         string='Category',
         required=True,
+        states={'closed': [('readonly', True)]},
         )
 
     start_datetime = fields.Datetime(
         string='Start date',
         track_visibility='onchange',
         states={'closed': [('readonly', True)]},
-        required=True
+        required=True,
     )
     stop_datetime = fields.Datetime(
         string='Stop date',
@@ -315,12 +316,12 @@ class CounselingCalendar(models.Model):
         comodel_name='res.users',
         string='Counselor',
         states={'closed': [('readonly', True)]},
-        track_visibility='onchange',
+        # track_visibility='onchange',
         required=True,
     )
     secretary_id = fields.Many2one(
         comodel_name='res.users',
-        string='Secretary',
+        string='Taken by',
         states={'closed': [('readonly', True)]},
         help='People who take the appointment',
         default=lambda self: self._uid,
@@ -341,6 +342,15 @@ class CounselingCalendar(models.Model):
     hangout_name = fields.Char(
         'Hangout name', size=64, related='partner_id.hangout_name')
 
+    cost = fields.Float(
+        string='Cost',
+        states={'closed': [('readonly', True)]},
+    )
+    revenue = fields.Float(
+        string='Revenue',
+        states={'closed': [('readonly', True)]},
+    )
+
     state = fields.Selection([
         ('draft', 'Unconfirmed'),
         ('open', 'Confirmed'),
@@ -352,6 +362,4 @@ class CounselingCalendar(models.Model):
         track_visibility='onchange',
         default='draft')
 
-    cost = fields.Float(string='Cost')
-    revenue = fields.Float(string='Revenue')
     # TODO Extra counselor?

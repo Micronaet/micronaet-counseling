@@ -1,26 +1,19 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# 	* counseling
+#	* counseling
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-06 07:55+0000\n"
-"PO-Revision-Date: 2020-04-06 09:59+0100\n"
+"POT-Creation-Date: 2020-04-06 11:27+0000\n"
+"PO-Revision-Date: 2020-04-06 11:27+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
+"Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
-"Language: it\n"
-"X-Generator: Poedit 1.6.10\n"
-
-#. module: counseling
-#: model:ir.model.fields,field_description:counseling.field_counseling_calendar_strategy_event
-msgid "\"Strategy event"
-msgstr "\"Strategia"
 
 #. module: counseling
 #: model:res.groups,name:counseling.group_admin
@@ -57,9 +50,19 @@ msgid "Analisys"
 msgstr "Analisi"
 
 #. module: counseling
+#: model:ir.ui.view,arch_db:counseling.counseling_calendar_view_form
+msgid "Appointment"
+msgstr "Appointment"
+
+#. module: counseling
 #: model:ir.ui.menu,name:counseling.menu_counseling_calendar
 msgid "Appointments"
 msgstr "Appuntamenti"
+
+#. module: counseling
+#: model:ir.model.fields,field_description:counseling.field_counseling_calendar_detail_event
+msgid "Argument appointment"
+msgstr "Argument appointment"
 
 #. module: counseling
 #: model:ir.ui.view,arch_db:counseling.view_counseling_calendar_search
@@ -190,11 +193,6 @@ msgid "Date"
 msgstr "Data"
 
 #. module: counseling
-#: model:ir.model.fields,field_description:counseling.field_counseling_calendar_detail_event
-msgid "Detail event"
-msgstr "Dettaglio appuntamento"
-
-#. module: counseling
 #: model:ir.ui.view,arch_db:counseling.counseling_calendar_view_form
 msgid "Detail event:"
 msgstr "Dettaglio appuntamento:"
@@ -235,7 +233,7 @@ msgstr "Fine chiamata"
 #. module: counseling
 #: model:ir.model,name:counseling.model_calendar_event
 msgid "Event"
-msgstr "Appuntamento"
+msgstr "Evento"
 
 #. module: counseling
 #: model:ir.ui.view,arch_db:counseling.view_calendar_event_excel_report_wizard
@@ -306,7 +304,7 @@ msgstr "ID"
 #: model:ir.model.fields,field_description:counseling.field_counseling_calendar___last_update
 #: model:ir.model.fields,field_description:counseling.field_counseling_calendar_category___last_update
 msgid "Last Modified on"
-msgstr "Data ultima modifica"
+msgstr "Data di ultima modifica"
 
 #. module: counseling
 #: model:ir.model.fields,field_description:counseling.field_calendar_event_excel_report_wizard_write_uid
@@ -326,12 +324,12 @@ msgstr "Ultima modifica il"
 #: model:ir.actions.act_window,name:counseling.action_calendar_event_excel_report_wizard
 #: model:ir.ui.menu,name:counseling.menu_calendar_event_excel_report_wizard
 msgid "Load product Report"
-msgstr "Stampa appuntamenti"
+msgstr "Carica prodotti"
 
 #. module: counseling
 #: model:ir.model.fields,field_description:counseling.field_counseling_calendar_location
 msgid "Location"
-msgstr "Luogo"
+msgstr "Location"
 
 #. module: counseling
 #: model:ir.model.fields,help:counseling.field_counseling_calendar_location
@@ -357,11 +355,6 @@ msgstr "Chiamata manuale finita e appuntamento aggiornato per orari"
 #: model:ir.ui.view,arch_db:counseling.counseling_calendar_view_form
 msgid "Manual start of call so update appointment time"
 msgstr "Chiamata manuale iniziate a aggiornato partenza appuntamento"
-
-#. module: counseling
-#: model:ir.ui.view,arch_db:counseling.counseling_calendar_view_form
-msgid "Meeting"
-msgstr "Riunione"
 
 #. module: counseling
 #: model:ir.model.fields,field_description:counseling.field_counseling_calendar_name
@@ -411,7 +404,7 @@ msgstr "Nota"
 #: model:ir.ui.menu,name:counseling.menu_counseling_configuration_partner
 #: model:ir.ui.view,arch_db:counseling.view_counseling_calendar_search
 msgid "Partner"
-msgstr "Partner"
+msgstr "Paziente"
 
 #. module: counseling
 #: model:ir.actions.act_window,name:counseling.res_partner_patient_action
@@ -435,22 +428,22 @@ msgstr "Privacy"
 #. module: counseling
 #: model:ir.ui.menu,name:counseling.menu_counseling_report
 msgid "Report"
-msgstr "Stampa"
-
-#. module: counseling
-#: model:ir.model.fields,field_description:counseling.field_counseling_calendar_report_event
-msgid "Report event"
-msgstr "Stampa appuntamenti"
+msgstr "Report"
 
 #. module: counseling
 #: model:ir.ui.view,arch_db:counseling.counseling_calendar_view_form
 msgid "Report event:"
-msgstr "Dettaglio appuntamento:"
+msgstr "Stampa appuntamenti:"
 
 #. module: counseling
 #: model:ir.ui.view,arch_db:counseling.counseling_calendar_view_form
 msgid "Restart"
 msgstr "Riavvia"
+
+#. module: counseling
+#: model:ir.model.fields,field_description:counseling.field_counseling_calendar_report_event
+msgid "Result appointment"
+msgstr "Resoconto appuntamento"
 
 #. module: counseling
 #: model:ir.model.fields,field_description:counseling.field_counseling_calendar_category_revenue
@@ -459,7 +452,6 @@ msgid "Revenue"
 msgstr "Ricavo"
 
 #. module: counseling
-#: model:ir.model.fields,field_description:counseling.field_counseling_calendar_secretary_id
 #: model:ir.ui.view,arch_db:counseling.view_counseling_calendar_search
 msgid "Secretary"
 msgstr "Segretaria"
@@ -514,9 +506,19 @@ msgid "Stop date"
 msgstr "Data fine"
 
 #. module: counseling
+#: model:ir.model.fields,field_description:counseling.field_counseling_calendar_strategy_event
+msgid "Strategy appointment"
+msgstr "Strategia appuntamento"
+
+#. module: counseling
 #: model:ir.ui.view,arch_db:counseling.counseling_calendar_view_form
 msgid "Strategy event:"
 msgstr "Strategia appuntamento:"
+
+#. module: counseling
+#: model:ir.model.fields,field_description:counseling.field_counseling_calendar_secretary_id
+msgid "Taken by"
+msgstr "Fissato da"
 
 #. module: counseling
 #: model:ir.ui.view,arch_db:counseling.counseling_calendar_view_form
@@ -554,9 +556,10 @@ msgstr "Non confermato"
 #. module: counseling
 #: model:ir.ui.view,arch_db:counseling.counseling_calendar_view_form
 msgid "hangout call"
-msgstr "chiamta hangout"
+msgstr "Chiamata hangout"
 
 #. module: counseling
 #: model:ir.model,name:counseling.model_medical_patient
 msgid "medical.patient"
 msgstr "medical.patient"
+
