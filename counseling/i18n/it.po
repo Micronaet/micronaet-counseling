@@ -1,0 +1,562 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* counseling
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 11.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-04-06 07:55+0000\n"
+"PO-Revision-Date: 2020-04-06 09:59+0100\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"Language: it\n"
+"X-Generator: Poedit 1.6.10\n"
+
+#. module: counseling
+#: model:ir.model.fields,field_description:counseling.field_counseling_calendar_strategy_event
+msgid "\"Strategy event"
+msgstr "\"Strategia"
+
+#. module: counseling
+#: model:res.groups,name:counseling.group_admin
+msgid "Admin"
+msgstr "Admin"
+
+#. module: counseling
+#: model:ir.actions.act_window,name:counseling.all_counseling_calendar_category_calendar_action
+#: model:ir.ui.menu,name:counseling.menu_all_counseling_calendar_category_calendar_action
+msgid "All category calendar"
+msgstr "Tutti eventi per categoria"
+
+#. module: counseling
+#: model:ir.actions.act_window,name:counseling.all_counseling_calendar_counselor_calendar_action
+#: model:ir.ui.menu,name:counseling.menu_all_counseling_calendar_counselor_calendar_action
+msgid "All counselor calendar"
+msgstr "Tutti eventi per consulente"
+
+#. module: counseling
+#: model:ir.actions.act_window,name:counseling.all_counseling_calendar_partner_calendar_action
+#: model:ir.ui.menu,name:counseling.menu_all_counseling_calendar_partner_calendar_action
+msgid "All partner calendar"
+msgstr "Tutti eventi per paziente"
+
+#. module: counseling
+#: model:ir.actions.act_window,name:counseling.all_counseling_calendar_state_calendar_action
+#: model:ir.ui.menu,name:counseling.menu_all_counseling_calendar_state_calendar_action
+msgid "All state calendar"
+msgstr "Tutti eventi per stato"
+
+#. module: counseling
+#: model:ir.ui.view,arch_db:counseling.counseling_calendar_view_form
+msgid "Analisys"
+msgstr "Analisi"
+
+#. module: counseling
+#: model:ir.ui.menu,name:counseling.menu_counseling_calendar
+msgid "Appointments"
+msgstr "Appuntamenti"
+
+#. module: counseling
+#: model:ir.ui.view,arch_db:counseling.view_counseling_calendar_search
+msgid "Calendar search"
+msgstr "Ricerca calendario"
+
+#. module: counseling
+#: model:ir.ui.view,arch_db:counseling.view_calendar_event_excel_report_wizard
+msgid "Cancel"
+msgstr "Annulla"
+
+#. module: counseling
+#: model:ir.actions.act_window,name:counseling.counseling_calendar_category_action
+#: model:ir.model.fields,field_description:counseling.field_calendar_event_excel_report_wizard_category_id
+#: model:ir.model.fields,field_description:counseling.field_counseling_calendar_category_id_7352
+#: model:ir.model.fields,field_description:counseling.field_counseling_calendar_category_name
+#: model:ir.ui.menu,name:counseling.menu_counseling_calendar_category
+#: model:ir.ui.view,arch_db:counseling.counseling_calendar_category_view_form
+#: model:ir.ui.view,arch_db:counseling.counseling_calendar_category_view_tree
+#: model:ir.ui.view,arch_db:counseling.view_counseling_calendar_search
+msgid "Category"
+msgstr "Categoria"
+
+#. module: counseling
+#: selection:counseling.calendar,state:0
+#: model:ir.ui.view,arch_db:counseling.counseling_calendar_view_form
+msgid "Closed"
+msgstr "Chiuso"
+
+#. module: counseling
+#: model:ir.ui.view,arch_db:counseling.view_counseling_calendar_search
+msgid "Closed state"
+msgstr "Stato chiuso"
+
+#. module: counseling
+#: model:ir.ui.menu,name:counseling.menu_counseling_configuration
+msgid "Configuration"
+msgstr "Configurazione"
+
+#. module: counseling
+#: selection:counseling.calendar,state:0
+#: model:ir.ui.view,arch_db:counseling.counseling_calendar_view_form
+msgid "Confirmed"
+msgstr "Confermato"
+
+#. module: counseling
+#: model:ir.ui.view,arch_db:counseling.view_counseling_calendar_search
+msgid "Confirmed state"
+msgstr "Stato confermato"
+
+#. module: counseling
+#: model:ir.actions.act_window,name:counseling.action_res_users_consultant_form
+#: model:ir.model.fields,field_description:counseling.field_res_partner_consultant
+#: model:ir.model.fields,field_description:counseling.field_res_users_consultant
+#: model:ir.ui.menu,name:counseling.menu_counseling_configuration_consultant
+#: model:ir.ui.view,arch_db:counseling.view_res_user_consultant_tree
+msgid "Consultant"
+msgstr "Consulente"
+
+#. module: counseling
+#: model:ir.ui.menu,name:counseling.menu_counseling_root
+msgid "Consultorio"
+msgstr "Consultorio"
+
+#. module: counseling
+#: model:ir.model,name:counseling.model_res_partner
+msgid "Contact"
+msgstr "Contatto"
+
+#. module: counseling
+#: model:ir.model.fields,field_description:counseling.field_counseling_calendar_category_cost
+#: model:ir.model.fields,field_description:counseling.field_counseling_calendar_cost
+#: model:ir.ui.view,arch_db:counseling.counseling_calendar_view_form
+msgid "Cost"
+msgstr "Costo"
+
+#. module: counseling
+#: model:ir.model,name:counseling.model_counseling_calendar
+msgid "Counseling calendar"
+msgstr "Calendario consulente"
+
+#. module: counseling
+#: model:ir.model,name:counseling.model_counseling_calendar_category
+msgid "Counseling category"
+msgstr "Calendario categoria"
+
+#. module: counseling
+#: model:ir.module.category,name:counseling.group_category_counseling
+msgid "Counseling groups"
+msgstr "Gruppo consulenti"
+
+#. module: counseling
+#: model:ir.model.fields,field_description:counseling.field_calendar_event_excel_report_wizard_counselor_id
+#: model:ir.model.fields,field_description:counseling.field_counseling_calendar_counselor_id
+#: model:ir.ui.view,arch_db:counseling.view_counseling_calendar_search
+#: model:res.groups,name:counseling.group_counselor
+msgid "Counselor"
+msgstr "Consulente"
+
+#. module: counseling
+#: model:ir.ui.view,arch_db:counseling.counseling_calendar_view_tree
+msgid "Counselor Calendar"
+msgstr "Calendario consulente"
+
+#. module: counseling
+#: model:ir.ui.view,arch_db:counseling.counseling_calendar_view_form
+#: model:ir.ui.view,arch_db:counseling.view_counseling_calendar_event_form_popup
+msgid "Counselor calendar"
+msgstr "Calendario consulente"
+
+#. module: counseling
+#: model:ir.model.fields,field_description:counseling.field_calendar_event_excel_report_wizard_create_uid
+#: model:ir.model.fields,field_description:counseling.field_counseling_calendar_category_create_uid
+#: model:ir.model.fields,field_description:counseling.field_counseling_calendar_create_uid
+msgid "Created by"
+msgstr "Creato da"
+
+#. module: counseling
+#: model:ir.model.fields,field_description:counseling.field_calendar_event_excel_report_wizard_create_date
+#: model:ir.model.fields,field_description:counseling.field_counseling_calendar_category_create_date
+#: model:ir.model.fields,field_description:counseling.field_counseling_calendar_create_date
+msgid "Created on"
+msgstr "Creato il"
+
+#. module: counseling
+#: model:ir.ui.view,arch_db:counseling.view_counseling_calendar_search
+msgid "Date"
+msgstr "Data"
+
+#. module: counseling
+#: model:ir.model.fields,field_description:counseling.field_counseling_calendar_detail_event
+msgid "Detail event"
+msgstr "Dettaglio appuntamento"
+
+#. module: counseling
+#: model:ir.ui.view,arch_db:counseling.counseling_calendar_view_form
+msgid "Detail event:"
+msgstr "Dettaglio appuntamento:"
+
+#. module: counseling
+#: model:ir.model.fields,field_description:counseling.field_calendar_event_excel_report_wizard_display_name
+#: model:ir.model.fields,field_description:counseling.field_counseling_calendar_category_display_name
+#: model:ir.model.fields,field_description:counseling.field_counseling_calendar_display_name
+msgid "Display Name"
+msgstr "Nome Completo"
+
+#. module: counseling
+#: selection:counseling.calendar,state:0
+#: model:ir.ui.view,arch_db:counseling.counseling_calendar_view_form
+msgid "Done"
+msgstr "Completato"
+
+#. module: counseling
+#: model:ir.ui.view,arch_db:counseling.view_counseling_calendar_search
+msgid "Done state"
+msgstr "Stato completato"
+
+#. module: counseling
+#: model:ir.ui.view,arch_db:counseling.view_counseling_calendar_search
+msgid "Draft state"
+msgstr "Stato bozza"
+
+#. module: counseling
+#: model:ir.model.fields,field_description:counseling.field_counseling_calendar_duration
+msgid "Duration"
+msgstr "Durata"
+
+#. module: counseling
+#: model:ir.ui.view,arch_db:counseling.counseling_calendar_view_form
+msgid "End call"
+msgstr "Fine chiamata"
+
+#. module: counseling
+#: model:ir.model,name:counseling.model_calendar_event
+msgid "Event"
+msgstr "Appuntamento"
+
+#. module: counseling
+#: model:ir.ui.view,arch_db:counseling.view_calendar_event_excel_report_wizard
+msgid "Extract"
+msgstr "Estrai"
+
+#. module: counseling
+#: model:ir.ui.view,arch_db:counseling.view_calendar_event_excel_report_wizard
+msgid "Extract event report:"
+msgstr "Estrai stampa appuntamenti:"
+
+#. module: counseling
+#: model:ir.model,name:counseling.model_calendar_event_excel_report_wizard
+msgid "Extract event wizard"
+msgstr "Wizard estrai dati"
+
+#. module: counseling
+#: model:ir.ui.view,arch_db:counseling.view_calendar_event_excel_report_wizard
+msgid "Filter:"
+msgstr "Filtro:"
+
+#. module: counseling
+#: model:ir.model.fields,field_description:counseling.field_calendar_event_excel_report_wizard_from_date
+msgid "From date >="
+msgstr "Dalla data >="
+
+#. module: counseling
+#: model:ir.ui.view,arch_db:counseling.view_counseling_calendar_search
+msgid "Group By..."
+msgstr "Raggruppa per..."
+
+#. module: counseling
+#: model:ir.ui.view,arch_db:counseling.res_partner_patient_view
+msgid "Hangout call"
+msgstr "Chiamata Hangout"
+
+#. module: counseling
+#: model:ir.ui.view,arch_db:counseling.counseling_calendar_view_form
+msgid "Hangout call open and start appointment!"
+msgstr "Chiamata hangaout aperta e appuntamento partito!"
+
+#. module: counseling
+#: model:ir.ui.view,arch_db:counseling.res_partner_patient_view
+msgid "Hangout chat"
+msgstr "Chat Hangout"
+
+#. module: counseling
+#: model:ir.model.fields,field_description:counseling.field_counseling_calendar_hangout_name
+#: model:ir.model.fields,field_description:counseling.field_res_partner_hangout_name
+#: model:ir.model.fields,field_description:counseling.field_res_users_hangout_name
+msgid "Hangout name"
+msgstr "Nome Hangout"
+
+#. module: counseling
+#: model:ir.model.fields,help:counseling.field_calendar_event_excel_report_wizard_privacy
+msgid "Hide patient data and intervent"
+msgstr "Nascone i dati del paziente"
+
+#. module: counseling
+#: model:ir.model.fields,field_description:counseling.field_calendar_event_excel_report_wizard_id
+#: model:ir.model.fields,field_description:counseling.field_counseling_calendar_category_id
+#: model:ir.model.fields,field_description:counseling.field_counseling_calendar_id
+msgid "ID"
+msgstr "ID"
+
+#. module: counseling
+#: model:ir.model.fields,field_description:counseling.field_calendar_event_excel_report_wizard___last_update
+#: model:ir.model.fields,field_description:counseling.field_counseling_calendar___last_update
+#: model:ir.model.fields,field_description:counseling.field_counseling_calendar_category___last_update
+msgid "Last Modified on"
+msgstr "Data ultima modifica"
+
+#. module: counseling
+#: model:ir.model.fields,field_description:counseling.field_calendar_event_excel_report_wizard_write_uid
+#: model:ir.model.fields,field_description:counseling.field_counseling_calendar_category_write_uid
+#: model:ir.model.fields,field_description:counseling.field_counseling_calendar_write_uid
+msgid "Last Updated by"
+msgstr "Ultima modifica di"
+
+#. module: counseling
+#: model:ir.model.fields,field_description:counseling.field_calendar_event_excel_report_wizard_write_date
+#: model:ir.model.fields,field_description:counseling.field_counseling_calendar_category_write_date
+#: model:ir.model.fields,field_description:counseling.field_counseling_calendar_write_date
+msgid "Last Updated on"
+msgstr "Ultima modifica il"
+
+#. module: counseling
+#: model:ir.actions.act_window,name:counseling.action_calendar_event_excel_report_wizard
+#: model:ir.ui.menu,name:counseling.menu_calendar_event_excel_report_wizard
+msgid "Load product Report"
+msgstr "Stampa appuntamenti"
+
+#. module: counseling
+#: model:ir.model.fields,field_description:counseling.field_counseling_calendar_location
+msgid "Location"
+msgstr "Luogo"
+
+#. module: counseling
+#: model:ir.model.fields,help:counseling.field_counseling_calendar_location
+msgid "Location of Event"
+msgstr "Luogo dell'Evento"
+
+#. module: counseling
+#: model:ir.ui.menu,name:counseling.menu_counseling_management
+msgid "Management"
+msgstr "Gestione"
+
+#. module: counseling
+#: model:res.groups,name:counseling.group_manager
+msgid "Manager"
+msgstr "Gestore"
+
+#. module: counseling
+#: model:ir.ui.view,arch_db:counseling.counseling_calendar_view_form
+msgid "Manual end of call so update appointment time"
+msgstr "Chiamata manuale finita e appuntamento aggiornato per orari"
+
+#. module: counseling
+#: model:ir.ui.view,arch_db:counseling.counseling_calendar_view_form
+msgid "Manual start of call so update appointment time"
+msgstr "Chiamata manuale iniziate a aggiornato partenza appuntamento"
+
+#. module: counseling
+#: model:ir.ui.view,arch_db:counseling.counseling_calendar_view_form
+msgid "Meeting"
+msgstr "Riunione"
+
+#. module: counseling
+#: model:ir.model.fields,field_description:counseling.field_counseling_calendar_name
+msgid "Meeting Subject"
+msgstr "Oggetto dell'appuntamento"
+
+#. module: counseling
+#: model:ir.ui.view,arch_db:counseling.view_counseling_calendar_category_calendar
+#: model:ir.ui.view,arch_db:counseling.view_counseling_calendar_counselor_calendar
+#: model:ir.ui.view,arch_db:counseling.view_counseling_calendar_partner_calendar
+#: model:ir.ui.view,arch_db:counseling.view_counseling_calendar_state_calendar
+msgid "Meetings"
+msgstr "Riunioni"
+
+#. module: counseling
+#: model:ir.actions.act_window,name:counseling.my_counseling_calendar_category_calendar_action
+#: model:ir.ui.menu,name:counseling.menu_my_counseling_calendar_category_calendar_action
+msgid "My category calendar"
+msgstr "Mio calendario categoria"
+
+#. module: counseling
+#: model:ir.actions.act_window,name:counseling.my_counseling_calendar_counselor_calendar_action
+msgid "My counselor calendar"
+msgstr "Mio calendario consulente"
+
+#. module: counseling
+#: model:ir.actions.act_window,name:counseling.my_counseling_calendar_partner_calendar_action
+#: model:ir.ui.menu,name:counseling.menu_my_counseling_calendar_partner_calendar_action
+msgid "My partner calendar"
+msgstr "Mio calendario paziente"
+
+#. module: counseling
+#: model:ir.actions.act_window,name:counseling.my_counseling_calendar_state_calendar_action
+#: model:ir.ui.menu,name:counseling.menu_my_counseling_calendar_state_calendar_action
+msgid "My state calendar"
+msgstr "Mio calendario stato"
+
+#. module: counseling
+#: model:ir.model.fields,field_description:counseling.field_counseling_calendar_category_note
+#: model:ir.ui.view,arch_db:counseling.counseling_calendar_category_view_form
+msgid "Note"
+msgstr "Nota"
+
+#. module: counseling
+#: model:ir.actions.act_window,name:counseling.res_partner_partner_action
+#: model:ir.model.fields,field_description:counseling.field_counseling_calendar_partner_id
+#: model:ir.ui.menu,name:counseling.menu_counseling_configuration_partner
+#: model:ir.ui.view,arch_db:counseling.view_counseling_calendar_search
+msgid "Partner"
+msgstr "Partner"
+
+#. module: counseling
+#: model:ir.actions.act_window,name:counseling.res_partner_patient_action
+#: model:ir.model.fields,field_description:counseling.field_calendar_event_excel_report_wizard_patient_id
+#: model:ir.model.fields,field_description:counseling.field_res_partner_patient
+#: model:ir.model.fields,field_description:counseling.field_res_users_patient
+#: model:ir.ui.menu,name:counseling.menu_counseling_configuration_patient
+msgid "Patient"
+msgstr "Paziente"
+
+#. module: counseling
+#: model:ir.model.fields,help:counseling.field_counseling_calendar_secretary_id
+msgid "People who take the appointment"
+msgstr "Personale che predispone l'appuntamento"
+
+#. module: counseling
+#: model:ir.model.fields,field_description:counseling.field_calendar_event_excel_report_wizard_privacy
+msgid "Privacy"
+msgstr "Privacy"
+
+#. module: counseling
+#: model:ir.ui.menu,name:counseling.menu_counseling_report
+msgid "Report"
+msgstr "Stampa"
+
+#. module: counseling
+#: model:ir.model.fields,field_description:counseling.field_counseling_calendar_report_event
+msgid "Report event"
+msgstr "Stampa appuntamenti"
+
+#. module: counseling
+#: model:ir.ui.view,arch_db:counseling.counseling_calendar_view_form
+msgid "Report event:"
+msgstr "Dettaglio appuntamento:"
+
+#. module: counseling
+#: model:ir.ui.view,arch_db:counseling.counseling_calendar_view_form
+msgid "Restart"
+msgstr "Riavvia"
+
+#. module: counseling
+#: model:ir.model.fields,field_description:counseling.field_counseling_calendar_category_revenue
+#: model:ir.model.fields,field_description:counseling.field_counseling_calendar_revenue
+msgid "Revenue"
+msgstr "Ricavo"
+
+#. module: counseling
+#: model:ir.model.fields,field_description:counseling.field_counseling_calendar_secretary_id
+#: model:ir.ui.view,arch_db:counseling.view_counseling_calendar_search
+msgid "Secretary"
+msgstr "Segretaria"
+
+#. module: counseling
+#: model:ir.ui.view,arch_db:counseling.counseling_calendar_view_form
+#: model:ir.ui.view,arch_db:counseling.res_partner_patient_view
+msgid "Skype call"
+msgstr "Chiamata Skype"
+
+#. module: counseling
+#: model:ir.ui.view,arch_db:counseling.counseling_calendar_view_form
+msgid "Skype call open and start appointment!"
+msgstr "Chiamata skype e inizio appuntamento!"
+
+#. module: counseling
+#: model:ir.ui.view,arch_db:counseling.res_partner_patient_view
+msgid "Skype chat"
+msgstr "Chat Skype"
+
+#. module: counseling
+#: model:ir.model.fields,field_description:counseling.field_counseling_calendar_skype_name
+#: model:ir.model.fields,field_description:counseling.field_res_partner_skype_name
+#: model:ir.model.fields,field_description:counseling.field_res_users_skype_name
+msgid "Skype name"
+msgstr "Nome Skype"
+
+#. module: counseling
+#: model:ir.ui.view,arch_db:counseling.res_partner_patient_view
+msgid "Social"
+msgstr "Social"
+
+#. module: counseling
+#: model:ir.ui.view,arch_db:counseling.counseling_calendar_view_form
+msgid "Start call"
+msgstr "Inizio chiamata"
+
+#. module: counseling
+#: model:ir.model.fields,field_description:counseling.field_counseling_calendar_start_datetime
+msgid "Start date"
+msgstr "Data inizio"
+
+#. module: counseling
+#: model:ir.model.fields,field_description:counseling.field_counseling_calendar_state
+#: model:ir.ui.view,arch_db:counseling.view_counseling_calendar_search
+msgid "Status"
+msgstr "Stato"
+
+#. module: counseling
+#: model:ir.model.fields,field_description:counseling.field_counseling_calendar_stop_datetime
+msgid "Stop date"
+msgstr "Data fine"
+
+#. module: counseling
+#: model:ir.ui.view,arch_db:counseling.counseling_calendar_view_form
+msgid "Strategy event:"
+msgstr "Strategia appuntamento:"
+
+#. module: counseling
+#: model:ir.ui.view,arch_db:counseling.counseling_calendar_view_form
+#: model:ir.ui.view,arch_db:counseling.res_partner_patient_view
+msgid "Telegram call"
+msgstr "Chiamata Telegram"
+
+#. module: counseling
+#: model:ir.ui.view,arch_db:counseling.counseling_calendar_view_form
+msgid "Telegram call open and start appointment!"
+msgstr "Chiamata telegram iniziata e appuntamento aggiornato!"
+
+#. module: counseling
+#: model:ir.ui.view,arch_db:counseling.res_partner_patient_view
+msgid "Telegram chat"
+msgstr "Chat Telegram"
+
+#. module: counseling
+#: model:ir.model.fields,field_description:counseling.field_counseling_calendar_telegram_name
+#: model:ir.model.fields,field_description:counseling.field_res_partner_telegram_name
+#: model:ir.model.fields,field_description:counseling.field_res_users_telegram_name
+msgid "Telegram name"
+msgstr "Nome Telegram"
+
+#. module: counseling
+#: model:ir.model.fields,field_description:counseling.field_calendar_event_excel_report_wizard_to_date
+msgid "To date <"
+msgstr "Alla data <"
+
+#. module: counseling
+#: selection:counseling.calendar,state:0
+msgid "Unconfirmed"
+msgstr "Non confermato"
+
+#. module: counseling
+#: model:ir.ui.view,arch_db:counseling.counseling_calendar_view_form
+msgid "hangout call"
+msgstr "chiamta hangout"
+
+#. module: counseling
+#: model:ir.model,name:counseling.model_medical_patient
+msgid "medical.patient"
+msgstr "medical.patient"
