@@ -188,6 +188,12 @@ class CounselingCalendar(models.Model):
         """
         return self.write({'state': 'closed'})
 
+    @api.multi
+    def wkf_go_cancel(self):
+        """ Go in cancel mode
+        """
+        return self.write({'state': 'cancel'})
+
     # -------------------------------------------------------------------------
     # Utility
     # -------------------------------------------------------------------------
@@ -356,6 +362,7 @@ class CounselingCalendar(models.Model):
         ('open', 'Confirmed'),
         ('done', 'Done'),
         ('closed', 'Closed'),  # Payed
+        ('cancel', 'Cancel'),
         ],
         string='Status',
         readonly=True,
