@@ -82,7 +82,9 @@ class CalendarEventExcelReportWizard(models.TransientModel):
         category = self.category_id
         privacy = self.privacy
 
-        domain = []
+        domain = [
+            ('state', '!=', 'cancel'),
+        ]
         if from_date:
             domain.append(
                 ('start_datetime', '>=', '%s 00:00:00' % from_date),

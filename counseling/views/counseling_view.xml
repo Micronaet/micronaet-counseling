@@ -106,7 +106,7 @@
                 <button name="wkf_go_open" type="object" string="Confirmed" icon="fa-thumbs-o-up fa-x2" attrs="{'invisible': [('state', '!=', 'draft')]}"/>
                 <button name="wkf_go_done" type="object" string="Done" icon="fa-thumbs-up fa-x2" attrs="{'invisible': [('state', '!=', 'open')]}"/>
                 <button name="wkf_go_closed" type="object" string="Closed" icon="fa-money fa-x2" attrs="{'invisible': [('state', '!=', 'done')]}" groups="counseling.group_admin,counseling.group_manager"/>
-                <button name="wkf_go_cancel" type="object" string="Cancel" icon="window-close fa-x2" attrs="{'invisible': [('state', '=', 'cancel')]}" />
+                <button name="wkf_go_cancel" type="object" string="Cancel" icon="fa-ban fa-x2" attrs="{'invisible': [('state', '=', 'cancel')]}" />
                 <field name="state" />
             </tree>
         </field>
@@ -122,7 +122,7 @@
                     <button name="wkf_go_open" type="object" string="Confirmed" icon="fa-thumbs-o-up fa-x2" attrs="{'invisible': [('state', '!=', 'draft')]}"/>
                     <button name="wkf_go_done" type="object" string="Done" icon="fa-thumbs-up fa-x2" attrs="{'invisible': [('state', '!=', 'open')]}"/>
                     <button name="wkf_go_closed" type="object" string="Closed" icon="fa-money fa-x2" attrs="{'invisible': [('state', '!=', 'done')]}" groups="counseling.group_admin,counseling.group_manager"/>
-                    <button name="wkf_go_cancel" type="object" string="Cancel" icon="window-close fa-x2" attrs="{'invisible': [('state', '=', 'cancel')]}" />
+                    <button name="wkf_go_cancel" type="object" string="Cancel" icon="fa-ban fa-x2" attrs="{'invisible': [('state', '=', 'cancel')]}" />
                     <field name="state" widget="statusbar"/>
                 </header>
                 <sheet>
