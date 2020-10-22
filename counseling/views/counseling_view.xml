@@ -1,5 +1,26 @@
 <?xml version="1.0"?>
 <odoo>
+     <record id="view_res_partner_hide_phone_form" model="ir.ui.view">
+         <field name="name">res.partner.hide.phone.form</field>
+         <field name="model">res.partner</field>
+         <field name="inherit_id" ref="base.view_partner_form" />
+         <field name="arch" type="xml">
+              <field name="name" position="attributes">
+                  <attribute name="groups">counseling.group_category_counseling,counseling.group_category_counseling</attribute>
+              </field>
+         </field>
+     </record>
+    <record id="view_res_partner_hide_phone_tree" model="ir.ui.view">
+         <field name="name">res.partner.hide.phone.tree</field>
+         <field name="model">res.partner</field>
+         <field name="inherit_id" ref="base.view_partner_tree" />
+         <field name="arch" type="xml">
+              <field name="name" position="attributes">
+                  <attribute name="groups">counseling.group_category_counseling,counseling.group_category_counseling</attribute>
+              </field>
+         </field>
+     </record>
+
      <record id="counseling_calendar_category_view_tree" model="ir.ui.view">
          <field name="name">Counseling category tree</field>
          <field name="model">counseling.calendar.category</field>
@@ -43,11 +64,11 @@
          <field name="priority" eval="40" />
          <field name="arch" type="xml">
             <tree string="Consultant" editable="bottom">
-	            <field name="name" readonly="1" />
-	            <field name="login" readonly="1" />
-	            <field name="lang" readonly="1" />
-	            <field name="login_date" readonly="1"/>
-	            <field name="consultant" />
+                <field name="name" readonly="1" />
+                <field name="login" readonly="1" />
+                <field name="lang" readonly="1" />
+                <field name="login_date" readonly="1"/>
+                <field name="consultant" />
             </tree>
          </field>
      </record>
