@@ -1,12 +1,12 @@
 "id","name","model_id:id","group_id:id","perm_read","perm_write","perm_create","perm_unlink"
-access_res_partner_user,res.partner,model_res_partner,base.group_user,1,0,0,0
+access_res_partner_user,res.partner,model_res_partner,base.group_user,1,1,1,1
 access_res_partner_manager,res.partner,model_res_partner,counseling.group_manager,1,1,1,1
 access_res_partner_admin,res.partner,model_res_partner,counseling.group_admin,1,1,1,1
 
-access_counseling_calendar_user,counseling.calendar,model_counseling_calendar,base.group_user,1,0,0,0
+access_counseling_calendar_user,counseling.calendar,model_counseling_calendar,base.group_user,1,1,1,1
 access_counseling_calendar_manager,counseling.calendar,model_counseling_calendar,counseling.group_manager,1,1,1,1
 access_counseling_calendar_admin,counseling.calendar,model_counseling_calendar,counseling.group_admin,1,1,1,1
 
-access_counseling_calendar_category_user,counseling.calendar.category,model_counseling_calendar_category,base.group_user,1,0,0,0
+access_counseling_calendar_category_user,counseling.calendar.category,model_counseling_calendar_category,base.group_user,1,1,1,1
 access_counseling_calendar_category_manager,counseling.calendar.category,model_counseling_calendar_category,counseling.group_manager,1,1,1,1
 access_counseling_calendar_category_admin,counseling.calendar.category,model_counseling_calendar_category,counseling.group_admin,1,1,1,1
